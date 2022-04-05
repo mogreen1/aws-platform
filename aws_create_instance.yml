@@ -73,7 +73,7 @@
 #      data: 
 #        target_hosts: "{{ ec2_instance_facts.instances[0].public_dns_name }}"
   
-  - name: initialized target_hosts
+  - name: initialize target_hosts as an empty list
     set_fact:
       target_hosts: []
 
