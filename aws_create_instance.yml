@@ -76,8 +76,8 @@
   - name: is list transfered without indexing through
     debug:
       var: item.public_dns_name
-    loop: "{{ ec2_instance_facts.instances | dict2items }}"
-    
+    loop: "{{ ec2_instance_facts.instances }}"
+
   - name:
     ansible.builtin.set_stats:
       data: 
