@@ -74,9 +74,15 @@
 #        target_hosts: "{{ ec2_instance_facts.instances[0].public_dns_name }}"
   
   - name: is list transfered without indexing through
-    debug:
-      var: item.public_dns_name
+    set_stats:
+      data: 
+        target_hosts:
+          - "{{ target_hosts + item.public_dns_name }}"
     loop: "{{ ec2_instance_facts.instances }}"
+
+  - name: is target_hosts a list
+    debug:  
+      var: target_hosts
 
   - name:
     ansible.builtin.set_stats:
