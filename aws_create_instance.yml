@@ -68,15 +68,15 @@
       name: "{{ ec2_instance_facts.instances[0].private_dns_name }}"
       groups: NewInsightInstance
 
-  - name:
-    ansible.builtin.set_stats:
-      data: 
-        target_hosts: "{{ ec2_instance_facts.instances[0].public_dns_name }}"
+#  - name:
+#    ansible.builtin.set_stats:
+#      data: 
+#        target_hosts: "{{ ec2_instance_facts.instances[0].public_dns_name }}"
   
-  - name:
+  - name: is list transfered without indexing through
     debug:
       var: ec2_instance_facts.instances.public_dns_name
-      
+
   - name:
     ansible.builtin.set_stats:
       data: 
