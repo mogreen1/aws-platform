@@ -13,9 +13,9 @@
     subnet_id: subnet-0f2f38197f3ed1263
     instance_count: 1
     aws_tags:
-      Env: "{env_tag}"
-      App: "{app_tag}"
-      Name: "{name_tag}"
+      Env: env_tag
+      App: app_tag
+      Name: name_tag
 
 
   collections: 
