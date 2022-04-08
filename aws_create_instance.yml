@@ -6,12 +6,16 @@
     security_group_id: sg-079ebd58a00104d74
     ami_id: ami-06f1e6f8b3457ae7c
     instance_size: m4.xlarge
-    instance_tags: {'Name':'mkb-platform-ec2-instance'}
+    #instance_tags: {'Name':'mkb-platform-ec2-instance'}
     vpc_id: vpc-0b41ab809d8ee56f6
     ssh_key_name: aws-rhpds-20211028
     region: us-east-2
     subnet_id: subnet-0f2f38197f3ed1263
     instance_count: 1
+    aws_tags:
+      Env: "{env_tag}"
+      App: "{app_tag}"
+      Name: "{name_tag}"
 
 
   collections: 
@@ -19,22 +23,22 @@
 
   tasks:
 
-  - name: Provision instance
-    amazon.aws.ec2_instance:
-      region: "{{ region }}"
-      state: started
-      key_name: "{{ ssh_key_name }}"
-      security_group: "{{ security_group_id }}"
-      instance_type: "{{ instance_size }}"
-      tags: "{{ instance_tags }}"
-      image_id: "{{ ami_id }}"
-      wait: true
-      #wait_timeout: 120
-      vpc_subnet_id: "{{ subnet_id }}"
-      count: "{{ instance_count }}"
-      network:
-        assign_public_ip: yes
-    register: ec2_instance_facts
+    - name: Provision instance
+      amazon.aws.ec2_instance:
+        region: "{{ region }}"
+        state: started
+        key_name: "{{ ssh_key_name }}"
+        security_group: "{{ security_group_id }}"
+        instance_type: "{{ instance_size }}"
+        tags: "{{ aws_tags }}"
+        image_id: "{{ ami_id }}"
+        wait: true
+        #wait_timeout: 120
+        vpc_subnet_id: "{{ subnet_id }}"
+        count: "{{ instance_count }}"
+        network:
+          assign_public_ip: yes
+      register: ec2_instance_facts
 
 #  - name: 
 #    amazon.aws.ec2_instance_info:
@@ -58,15 +62,15 @@
 #      data: 
 #        target_hosts: "{{ ec2_instance_facts.instances[0].public_dns_name }}"
   
-  - name: initialize target_hosts as an empty list
-    set_fact:
-      target_hosts: []
+    - name: initialize target_hosts as an empty list
+      set_fact:
+        target_hosts: []
 
-  - name: load target_hosts list with hosts to target for configuration
-    set_stats:
-      data: 
-        target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
-    loop: "{{ ec2_instance_facts.instances }}"
+    - name: load target_hosts list with hosts to target for configuration
+      set_stats:
+        data: 
+          target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
+      loop: "{{ ec2_instance_facts.instances }}"
 
 #  - name: is target_hosts a list
 #    debug:  
@@ -77,6 +81,6 @@
 #      data: 
 #        wf_ec2_instance_facts: "{{ ec2_instance_facts }}"
 
-  - name: give instance time to initialize
-    ansible.builtin.wait_for: 
-      timeout: 120
+    - name: give instance time to initialize
+      ansible.builtin.wait_for: 
+        timeout: 120
