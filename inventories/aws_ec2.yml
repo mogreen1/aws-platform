@@ -15,3 +15,7 @@ compose:
   # Use the private IP address to connect to the host
   # (note: this does not modify inventory_hostname, which is set via I(hostnames))
   ansible_host: private_ip_address
+
+filters:
+  # All instances with their state as `running`
+  instance-state-name: running
