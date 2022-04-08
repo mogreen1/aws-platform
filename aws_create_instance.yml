@@ -4,9 +4,9 @@
   gather_facts: false
   vars:
     security_group_id: sg-079ebd58a00104d74
-    #ami_id:
-    #  rhel84: ami-0635a8c4049019474
-    #  rhel85: ami-06f1e6f8b3457ae7c
+    ami_id:
+      rhel84: ami-0635a8c4049019474
+      rhel85: ami-06f1e6f8b3457ae7c
     ami_id: ami-06f1e6f8b3457ae7c
     instance_size: m4.xlarge
     #instance_tags: {'Name':'mkb-platform-ec2-instance'}
@@ -37,7 +37,7 @@
           Env: "{{ env_tag }}"
           App: "{{ app_tag }}"
           Name: "{{ name_tag }}"
-        image_id: "{{ ami_id }}"
+        image_id: "{{ ami_id[image_name] }}"
         wait: true
         #wait_timeout: 120
         vpc_subnet_id: "{{ subnet_id }}"
@@ -67,7 +67,10 @@
 #    ansible.builtin.set_stats:
 #      data: 
 #        target_hosts: "{{ ec2_instance_facts.instances[0].public_dns_name }}"
-  
+    - name: value of ami_id.image_name
+      debug:  
+        var: ami_id[image_name]
+
     - name: initialize target_hosts as an empty list
       set_fact:
         target_hosts: []
