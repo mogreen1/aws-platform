@@ -25,7 +25,10 @@
     - amazon.aws
 
   tasks:
-
+    - name: value of ami_id.image_name
+      debug:  
+        var: ami_id[image_name]
+        
     - name: Provision instance
       amazon.aws.ec2_instance:
         region: "{{ region }}"
