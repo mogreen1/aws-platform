@@ -24,17 +24,6 @@
   - name: clear our subscription manager meta information
     ansible.builtin.command: subscription-manager clean
 
-  - name: Remove snapshot UUID
-    ansible.builtin.file:
-      path: /etc/rhsm/facts/dmi_system_uuid.facts
-      state: absent
-
-  - name: generate new UUID
-    ansible.builtin.shell: _UUID=$(uuidgen)
-
-  - debug:  #created custom credential type RedHat Portal
-      msg: "{{ lookup('env', 'PORTAL_USERNAME') }}"
-
   - name: register system and attach smart management subscription
     community.general.redhat_subscription:
       state: present
@@ -54,17 +43,10 @@
 
   - name: install ansible Engine
     ansible.builtin.yum:
-      name: ansible
-      state: present
-
-  - name: install rhc playbook
-    ansible.builtin.yum:
-      name: rhc-worker-playbook
-      state: present
-
-  - name: install red hat connector
-    ansible.builtin.yum:
-      name: rhc
+      name: 
+        - ansible
+        - rhc-worker-playbook
+        - rhc
       state: present
 
   - name: run Red Hat Connector
