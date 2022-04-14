@@ -15,5 +15,7 @@ compose:
 keyed_groups:
   - key: os
     separator: ""
+    prefix: 'os_'
   - key: classification
     separator: ""
+    prefix: 'env_'
