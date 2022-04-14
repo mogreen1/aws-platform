@@ -14,8 +14,8 @@ compose:
   ansible_host: host_name
 keyed_groups:
   - key: os
-    separator: ""
-    prefix: 'os_'
+    separator: "_"
+    prefix: os
   - key: classification
-    separator: ""
-    prefix: 'env_'
+    separator: "_"
+    prefix: env
