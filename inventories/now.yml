@@ -22,3 +22,4 @@ keyed_groups:
     prefix: env
   - key: manufacturer
     separator: "_"
+    prefix: mfc
