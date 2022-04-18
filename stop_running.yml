@@ -32,7 +32,7 @@
 
     - name: shows running instances
       debug:  
-        msg: target_hosts
+        var: target_hosts
 
 - name: shut down running instances
   hosts: target_hosts
