@@ -28,3 +28,6 @@
     - name: shows running instances
       debug:  
         msg: Here are the target hosts {{ target_hosts }}
+
+- name: shut down running instances
+  hosts: target_hosts
