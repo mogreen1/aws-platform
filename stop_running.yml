@@ -10,14 +10,14 @@
     instance_size: m4.xlarge
     vpc_id: vpc-0b41ab809d8ee56f6
     ssh_key_name: aws-rhpds-20211028
-    region: us-east-2
+    aws_region: us-east-2
     subnet_id: subnet-0f2f38197f3ed1263
     instance_count: 1
 
   tasks:
     - name: gather instance information
-      amazon.aws.ec2_instance:
-        region: "{{ ec2_region }}"
+      amazon.aws.ec2_instance_info:
+        region: "{{ aws_region }}"
         uptime: 60
         filters:
           "tag:Env": "Dev"
