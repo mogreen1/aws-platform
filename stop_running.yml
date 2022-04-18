@@ -16,8 +16,13 @@
       register: ec2_instance_facts
 
     - name: initialize target_hosts as an empty list
-      set_stats:
+      set_fact:
         target_hosts: []
+
+    - name: build target hosts with set_fact
+      set_fact:
+        target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
+      loop: "{{ ec2_instance_facts.instances }}"
 
     - name: show target hosts
       debug:
