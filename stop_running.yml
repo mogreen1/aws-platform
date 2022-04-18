@@ -3,16 +3,7 @@
   hosts: localhost
   gather_facts: false
   vars:
-    security_group_id: sg-079ebd58a00104d74
-    ami_id:
-      rhel84: ami-0635a8c4049019474
-      rhel85: ami-06f1e6f8b3457ae7c
-    instance_size: m4.xlarge
-    vpc_id: vpc-0b41ab809d8ee56f6
-    ssh_key_name: aws-rhpds-20211028
-    aws_region: us-east-2
-    subnet_id: subnet-0f2f38197f3ed1263
-    instance_count: 1
+    aws_region: us-east-1
 
   tasks:
     - name: gather instance information
