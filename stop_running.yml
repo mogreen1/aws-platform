@@ -19,6 +19,11 @@
       set_fact:
         target_hosts: []
 
+    - name: show target hosts
+      debug:
+        var: item.public_dns_name
+      loop: "{{ ec2_instance_facts.instances }}"
+
     - name: load target_hosts list with hosts to target for configuration
       set_stats:
         data: 
