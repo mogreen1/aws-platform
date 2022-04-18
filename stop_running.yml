@@ -31,3 +31,8 @@
 
 - name: shut down running instances
   hosts: target_hosts
+  
+  tasks:  
+    - name: show target_hosts
+      debug: 
+        var: target_hosts
