@@ -47,6 +47,11 @@
           target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
       loop: "{{ ec2_instance_facts.instances }}"
 
+    - name: show me running instances
+      debug:  
+        var: item.public_dns_name
+      loop: "{{ ec2_instance_facts.instances }}"
+
     - name: give instance time to initialize
       ansible.builtin.wait_for: 
         timeout: 120
