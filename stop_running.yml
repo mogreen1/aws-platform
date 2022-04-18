@@ -27,4 +27,4 @@
 
     - name: shows running instances
       debug:  
-        var: target_hosts
+        msg: Here are the target hosts {{ target_hosts }}
