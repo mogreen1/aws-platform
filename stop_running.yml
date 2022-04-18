@@ -24,20 +24,15 @@
         target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
       loop: "{{ ec2_instance_facts.instances }}"
 
-    - name: show target hosts
-      debug:
-        var: item.public_dns_name
-      loop: "{{ ec2_instance_facts.instances }}"
-
-    - name: load target_hosts list with hosts to target for configuration
-      set_stats:
-        data: 
-          target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
-      loop: "{{ ec2_instance_facts.instances }}"
+#    - name: load target_hosts list with hosts to target for configuration
+#      set_stats:
+#        data: 
+#          target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
+#      loop: "{{ ec2_instance_facts.instances }}"
 
     - name: shows running instances
       debug:  
-        msg: Here are the target hosts {{ target_hosts }}
+        msg: target_hosts
 
 - name: shut down running instances
   hosts: target_hosts
