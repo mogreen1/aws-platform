@@ -21,7 +21,7 @@
         uptime: 60
         filters:
           "tag:Env": "Dev"
-        instance-state-name: [ "running"]
+          instance-state-name: [ "running"]
       register: ec2_instance_facts
 
     - name: initialize target_hosts as an empty list
