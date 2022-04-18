@@ -1,5 +1,5 @@
 ---
-- name: Stop AWS Running Instances
+- name: determine running aws instances
   hosts: localhost
   gather_facts: false
   vars:
@@ -13,3 +13,27 @@
     region: us-east-2
     subnet_id: subnet-0f2f38197f3ed1263
     instance_count: 1
+
+  tasks:
+    - name: gather instance information
+      amazon.aws.ec2_instance:
+        region: "{{ ec2_region }}"
+        uptime: 60
+        filters:
+          "tag:Env": "Dev"
+        instance-state-name: [ "running"]
+      register: ec2_instance_facts
+
+    - name: initialize target_hosts as an empty list
+      set_fact:
+        target_hosts: []
+
+    - name: load target_hosts list with hosts to target for configuration
+      set_stats:
+        data: 
+          target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
+      loop: "{{ ec2_instance_facts.instances }}"
+
+    - name: shows running instances
+      debug:  
+        var: target_hosts
