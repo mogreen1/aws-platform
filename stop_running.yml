@@ -37,12 +37,12 @@
 #          target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
 #      loop: "{{ ec2_instance_facts.instances }}"
 
-    - name: shows running instances
-      debug:  
-        var: target_hosts
+#    - name: shows running instances
+#      debug:  
+#        var: target_hosts
 
-    - name: shut down running instances.
-      amazon.aws.ec2_instance
+#    - name: shut down running instances.
+#      amazon.aws.ec2_instance
 
 #- name: shut down running instances
 #  hosts: target_hosts
