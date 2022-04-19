@@ -17,6 +17,7 @@
 
     - name: shut down instances
       amazon.aws.ec2:
+        region: "{{ aws_region }}"
         instance_id: "{{ item.instance_id }}"
         state: stopped
       loop: "{{ ec2_instance_facts.instances }}"
