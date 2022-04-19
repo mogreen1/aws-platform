@@ -1,17 +1,17 @@
 ---
-- name: determine running aws instances
+- name: shutdown Dev aws instances
   hosts: localhost
   gather_facts: false
   vars:
     aws_region: us-east-1
 
   tasks:
-    - name: gather instance information
+    - name: gather running instance information
       amazon.aws.ec2_instance_info:
         region: "{{ aws_region }}"
         uptime: 60
         filters:
-          "tag:Env": "dev"
+          "tag:Env": "Dev"
           instance-state-name: [ "running" ]
       register: ec2_instance_facts
 
@@ -21,34 +21,3 @@
         instance_id: "{{ item.instance_id }}"
         state: stopped
       loop: "{{ ec2_instance_facts.instances }}"
-
-
-    - name: initialize target_hosts as an empty list
-      set_fact:
-        target_hosts: []
-
-    - name: build target hosts with set_fact
-      set_fact:
-        target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
-      loop: "{{ ec2_instance_facts.instances }}"
-
-#    - name: load target_hosts list with hosts to target for configuration
-#      set_stats:
-#        data: 
-#          target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
-#      loop: "{{ ec2_instance_facts.instances }}"
-
-#    - name: shows running instances
-#      debug:  
-#        var: target_hosts
-
-#    - name: shut down running instances.
-#      amazon.aws.ec2_instance
-
-#- name: shut down running instances
-#  hosts: target_hosts
-#  
-#  tasks:  
-#    - name: show target_hosts
-#      debug: 
-#        var: target_hosts
