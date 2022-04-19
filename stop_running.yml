@@ -11,9 +11,16 @@
         region: "{{ aws_region }}"
         uptime: 60
         filters:
-          #"tag:Env": "Dev"
-          instance-state-name: [ "running"]
+          "tag:Env": "dev"
+          instance-state-name: [ "running" ]
       register: ec2_instance_facts
+
+    - name: shut down instances
+      amazon.aws.ec2:
+        instance_id: "{{ item.instance_id }}"
+        state: stopped
+      loop: "{{ ec2_instance_facts.instances }}"
+
 
     - name: initialize target_hosts as an empty list
       set_fact:
@@ -34,10 +41,13 @@
       debug:  
         var: target_hosts
 
-- name: shut down running instances
-  hosts: target_hosts
-  
-  tasks:  
-    - name: show target_hosts
-      debug: 
-        var: target_hosts
+    - name: shut down running instances.
+      amazon.aws.ec2_instance
+
+#- name: shut down running instances
+#  hosts: target_hosts
+#  
+#  tasks:  
+#    - name: show target_hosts
+#      debug: 
+#        var: target_hosts
