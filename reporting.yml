@@ -45,8 +45,7 @@
 
   post_tasks:
     - name: gather public IP address
-      uri: 
-        url: https://checkip.amazonaws.com
+      command: curl checkip.amazonaws.com
       register: web_server_pulic_ip
 
     - name: webserver IP address - all output
