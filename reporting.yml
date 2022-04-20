@@ -49,10 +49,6 @@
       register: web_server_pulic_ip
       delegate_to: ip-10-0-0-66.ec2.internal
 
-    - name: webserver IP address - all output
+    - name: URL to linux report
       debug:  
-        var: web_server_pulic_ip
-
-    - name: webserver IP address - just stdout
-      debug:  
-        var: web_server_pulic_ip.stdout
+        msg: "You can access your report at http://{{ web_server_pulic_ip.stdout }}/linux.html"
