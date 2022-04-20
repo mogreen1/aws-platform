@@ -47,11 +47,11 @@
     - name: gather public IP address
       command: curl checkip.amazonaws.com
       register: web_server_pulic_ip
+      delegate_to: ip-10-0-0-66.ec2.internal
 
     - name: webserver IP address - all output
       debug:  
         var: web_server_pulic_ip
-
 
     - name: webserver IP address - just stdout
       debug:  
