@@ -42,3 +42,18 @@
     - name: run linux package and service report
       include_role:
         name:  build_report_linux
+
+  post_tasks:
+    - name: gather public IP address
+      uri: 
+        url: https://checkip.amazonaws.com
+      register: web_server_pulic_ip
+
+    - name: webserver IP address - all output
+      debug:  
+        var: web_server_pulic_ip
+
+
+    - name: webserver IP address - just stdout
+      debug:  
+        var: web_server_pulic_ip.stdout
