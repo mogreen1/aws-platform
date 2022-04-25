@@ -58,7 +58,6 @@
       until: r_instance_facts.instances.state.name = "running"
       retries: 30
       delay: 10
-      delegate_to: "{{ target_hosts }}"
 
 
 #    - name: give instance time to initialize
