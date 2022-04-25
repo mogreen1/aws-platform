@@ -47,18 +47,18 @@
           target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
       loop: "{{ ec2_instance_facts.instances }}"
 
-    - name: show me running instances
+    - name: show provisioned instances
       debug:  
         var: item.public_dns_name
       loop: "{{ ec2_instance_facts.instances }}"
 
-    - name: wait until instance is in "running" status
+    - name: wait until provisioned instances are in "running" status
       amazon.aws.ec2_instance_info: 
       register: r_instance_facts
       until: r_instance_facts.instances.state.name = "running"
       retries: 30
       delay: 10
-      delegate_to: {{ target_hosts }}
+      delegate_to: "{{ target_hosts }}"
 
 
 #    - name: give instance time to initialize
