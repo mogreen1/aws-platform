@@ -1,2 +1,4 @@
 rhsa_patch_list:
+  - RHSA-2022:0899
   - RHSA-2022:1065
+  - RHSA-2021:5226
