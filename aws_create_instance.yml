@@ -52,14 +52,16 @@
         var: item.public_dns_name
       loop: "{{ ec2_instance_facts.instances }}"
 
-    - name: wait until provisioned instances are in "running" status
-      amazon.aws.ec2_instance_info: 
-      register: r_instance_facts
-      until: r_instance_facts.instances.state.name = "running"
-      retries: 30
-      delay: 10
+    - name: give instance time to initialize
+      ansible.builtin.wait_for: 
+        timeout: 120
+
+#    - name: wait until provisioned instances are in "running" status
+#      amazon.aws.ec2_instance_info: 
+#      register: r_instance_facts
+#      until: r_instance_facts.instances.state.name = "running"
+#      retries: 30
+#      delay: 10
 
 
-#    - name: give instance time to initialize
-#      ansible.builtin.wait_for: 
-#        timeout: 120
+
