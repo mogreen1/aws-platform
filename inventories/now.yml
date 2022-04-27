@@ -23,3 +23,6 @@ keyed_groups:
   - key: manufacturer
     separator: "_"
     prefix: mfc
+query:
+  - os: = rhel_8%
+  - classification: = Production
