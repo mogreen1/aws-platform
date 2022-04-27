@@ -13,16 +13,16 @@ columns:
 compose:
   ip_addr: ip_address
   ansible_host: host_name
-keyed_groups:
-  - key: os
-    separator: "_"
-    prefix: os
-  - key: classification
-    separator: "_"
-    prefix: env
-  - key: manufacturer
-    separator: "_"
-    prefix: mfc
+#keyed_groups:
+#  - key: os
+#    separator: "_"
+#    prefix: os
+#  - key: classification
+#    separator: "_"
+#    prefix: env
+#  - key: manufacturer
+#    separator: "_"
+#    prefix: mfc
 query:
-  - os: = rhel_8%
-  - classification: = Production
+#  - os: = rhel_8%
+#  - classification: = Production
