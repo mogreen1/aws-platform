@@ -24,6 +24,6 @@ keyed_groups:
 #    separator: "_"
 #    prefix: mfc
 query:
-  - classificationINProduction^os=rhel_8x64
-# - os:=rhel_8x64^classification=Production
-#  - classification: = Production
+#  - classificationINProduction^os=rhel_8x64
+- classification: IN Production
+  os: = rhel_8x64
