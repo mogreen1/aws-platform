@@ -24,7 +24,7 @@ keyed_groups:
     separator: "_"
     prefix: mfc
 query:
-  - "classificationINProduction^os=rhel_8x64"
+  - 'classificationINProduction^os=rhel_8x64'
   
 #Easier to read, but accomplishes the same thing:
 #
