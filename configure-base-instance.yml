@@ -1,6 +1,12 @@
 ---
 - name: Configure AWS EC2 Image to communicate with Insights via RHC
   hosts: "{{ target_hosts }}"
+  vars:
+    subscription: 
+      rhel_individual_dev: 8a85f9a17e6edc09017ea0d473553242
+      rhel_individual_dev2: 8a85f9a17e6edc09017e9cccdb4744a1
+      rhel_self_support: 8a85f9a17d76f31b017dc514715641e6
+      rhel_smart_management_std: ""
 
   tasks:
 
@@ -26,7 +32,7 @@
       username: "{{ lookup('env', 'PORTAL_USERNAME') }}"
       password: "{{ lookup('env', 'PORTAL_PASSWORD') }}"
       force_register: yes
-      pool_ids: 8a85f999790fad8401791ee5cac22f09
+      pool_ids: "{{ subscription[subscription_name]}}"
       # consider using activation key parameter instead (see examples in docs)
 
   - name: enable subscription manager
