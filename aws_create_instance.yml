@@ -52,9 +52,17 @@
         var: item.public_dns_name
       loop: "{{ ec2_instance_facts.instances }}"
 
-    - name: give instance time to initialize
-      ansible.builtin.wait_for: 
-        timeout: 150
+    - name: Wait for system to receive commands
+      delegate_to: "{{ target_hosts }}"
+      command: id 
+      register: result
+      until: result.stdout.find("all systems go") != -1
+      retries: 35
+      delay: 10
+
+#    - name: give instance time to initialize
+#      ansible.builtin.wait_for: 
+#        timeout: 150
 
 #    - name: wait until provisioned instances are in "running" status
 #      amazon.aws.ec2_instance_info: 
