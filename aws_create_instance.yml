@@ -53,12 +53,13 @@
       loop: "{{ ec2_instance_facts.instances }}"
 
     - name: Wait for system to receive commands
-      delegate_to: "{{ target_hosts }}"
+      delegate_to: "{{ item }}"
       command: id 
       register: result
       until: result.stdout.find("all systems go") != -1
       retries: 35
       delay: 10
+      loop: "{{ target_hosts }}"
 
 #    - name: give instance time to initialize
 #      ansible.builtin.wait_for: 
