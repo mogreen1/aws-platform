@@ -52,8 +52,8 @@
         var: item.public_dns_name
       loop: "{{ ec2_instance_facts.instances }}"
 
-    - name: Wait 600 seconds for target connection to become reachable/usable
-      wait_for_connection:
+#    - name: Wait 600 seconds for target connection to become reachable/usable
+#      wait_for_connection:
 
 #    - name: Wait for system to receive commands
 #      delegate_to: "{{ item }}"
@@ -64,9 +64,9 @@
 #      delay: 10
 #      loop: "{{ target_hosts }}"
 
-#    - name: give instance time to initialize
-#      ansible.builtin.wait_for: 
-#        timeout: 150
+    - name: give instance time to initialize
+      ansible.builtin.wait_for: 
+        timeout: 150
 
 #    - name: wait until provisioned instances are in "running" status
 #      amazon.aws.ec2_instance_info: 
