@@ -3,9 +3,8 @@
   hosts: "{{ target_hosts }}"
   vars:
     subscription: 
-      rhel_individual_dev: 8a85f9a17e6edc09017ea0d473553242
-      rhel_individual_dev2: 8a85f9a17e6edc09017e9cccdb4744a1
-      rhel_self_support: 8a85f9a17d76f31b017dc514715641e6
+      rhel_individual_dev: 2c92808179803e53017a0f9a0b161b35
+      rhel_development_teams: 8a82c58b8086238501808ba2619b113a
       rhel_smart_management_std: 8a82c68d80862c7301808ba1de7157fe
 
   tasks:
