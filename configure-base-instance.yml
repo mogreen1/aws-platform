@@ -6,7 +6,7 @@
       rhel_individual_dev: 8a85f9a17e6edc09017ea0d473553242
       rhel_individual_dev2: 8a85f9a17e6edc09017e9cccdb4744a1
       rhel_self_support: 8a85f9a17d76f31b017dc514715641e6
-      rhel_smart_management_std: ""
+      rhel_smart_management_std: 8a82c68d80862c7301808ba1de7157fe
 
   tasks:
 
@@ -26,7 +26,7 @@
   - name: clear our subscription manager meta information
     ansible.builtin.command: subscription-manager clean
 
-  - name: register system and attach smart management subscription
+  - name: register system and attach rhel subscription
     community.general.redhat_subscription:
       state: present
       username: "{{ lookup('env', 'PORTAL_USERNAME') }}"
