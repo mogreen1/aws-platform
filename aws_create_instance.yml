@@ -7,6 +7,7 @@
     ami_id:
       rhel84: ami-0635a8c4049019474
       rhel85: ami-06f1e6f8b3457ae7c
+      windows2016: ami-08aa543413d7bdc57
     instance_size: m4.xlarge
     vpc_id: vpc-0b41ab809d8ee56f6
     ssh_key_name: aws-rhpds-20211028
@@ -52,6 +53,17 @@
         var: item.public_dns_name
       loop: "{{ ec2_instance_facts.instances }}"
 
+    - name: give instance time to initialize
+      ansible.builtin.wait_for: 
+        timeout: 150
+
+#    - name: wait until provisioned instances are in "running" status
+#      amazon.aws.ec2_instance_info: 
+#      register: r_instance_facts
+#      until: r_instance_facts.instances.state.name = "running"
+#      retries: 30
+#      delay: 10
+
 #    - name: Wait 600 seconds for target connection to become reachable/usable
 #      wait_for_connection:
 
@@ -63,17 +75,6 @@
 #      retries: 35
 #      delay: 10
 #      loop: "{{ target_hosts }}"
-
-    - name: give instance time to initialize
-      ansible.builtin.wait_for: 
-        timeout: 150
-
-#    - name: wait until provisioned instances are in "running" status
-#      amazon.aws.ec2_instance_info: 
-#      register: r_instance_facts
-#      until: r_instance_facts.instances.state.name = "running"
-#      retries: 30
-#      delay: 10
 
 
 
