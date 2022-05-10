@@ -20,7 +20,7 @@
 
   tasks:
     - debug:
-        var: ami_id.windows2016
+        var: ami_id['windows2016']
 
     - name: Provision instance
       amazon.aws.ec2_instance:
