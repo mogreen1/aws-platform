@@ -7,6 +7,12 @@
 # modules:
 #   - https://docs.ansible.com/ansible/latest/collections/community/crypto/openssh_keypair_module.html
 #     This module allows one to (re)generate OpenSSH private and public keys. It uses ssh-keygen to generate keys.
+# demo specific:
+# provision 4 servers:
+#   - bastion
+#   - server1
+#   - server2
+#   - server3
 
 
 - name: create users for demo purposes
