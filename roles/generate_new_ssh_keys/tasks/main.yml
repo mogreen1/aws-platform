@@ -8,12 +8,10 @@
   loop: "{{users}}"
   register: r_new_keys
 
-- name: list new keys
-  debug: 
-    var: r_new_keys
 
-#- name: load target_hosts list with hosts to target for configuration
-#  set_stats:
-#    data: 
-#      target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
-#  loop: "{{ ec2_instance_facts.instances }}"
+
+- name: load target_hosts list with hosts to target for configuration
+  set_stats:
+    data: 
+      user_key_data: r_new_keys 
+      
