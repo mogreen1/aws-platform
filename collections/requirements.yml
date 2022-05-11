@@ -2,7 +2,8 @@ collections:
   - name: redhat.insights
   - name: community.general
   - name: amazon.aws
-#  - name: ansible.tower
   - name: servicenow.servicenow
   - name: servicenow.itsm
+  - name: community.crypto
 #  - name: ansible.builtin
+#  - name: ansible.tower
