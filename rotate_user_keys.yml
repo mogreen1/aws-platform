@@ -1,0 +1,19 @@
+# considerations:
+# where will private keys be stored 
+#   - /home/<user>/.ssh on bastion?
+#   - key storage service
+# define users: who needs new keys
+# define targets: what systems need the private keys
+# modules:
+#   - https://docs.ansible.com/ansible/latest/collections/community/crypto/openssh_keypair_module.html
+#     This module allows one to (re)generate OpenSSH private and public keys. It uses ssh-keygen to generate keys.
+---
+- name: rotatate ssh key demo
+  hosts: Name_bastion 
+  vars:
+    users:
+      - usera
+      - userb
+      - userc
+
+  include_role: create_users
