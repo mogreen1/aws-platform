@@ -24,7 +24,7 @@
 
 - name: show user data
   debug: 
-    var: r_newuser_data
+    var: r_new_user_data
 
 
 #- name: 
