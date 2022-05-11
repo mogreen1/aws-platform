@@ -1,2 +1,12 @@
 ---
 # tasks file for generate_new_ssh_keys
+- name: Force regenerate an OpenSSH keypair if it already exists
+  community.crypto.openssh_keypair:
+    path: /home/{{item}}/id_rsa
+    force: True
+  loop: "{{users}}"
+  register: r_new_keys
+
+- name: list new keys
+  debug: 
+    var: r_new_keys
