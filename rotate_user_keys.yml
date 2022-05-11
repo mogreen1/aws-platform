@@ -22,4 +22,5 @@
       - userb
       - userc
 
-  include_role: create_users
+  roles: 
+    - role: create_users
