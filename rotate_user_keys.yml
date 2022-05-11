@@ -26,4 +26,4 @@
   roles: 
     - role: create_users
     - role: generate_new_ssh_keys
-    - role: distribute_public_keys
+#    - role: distribute_public_keys
