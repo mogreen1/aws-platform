@@ -15,7 +15,7 @@
 
 - name: what is the value some_server  
   debug:
-    var: hostvars['localhost']['ansible_facts']
+    var: hostvars['localhost']
 
 - name: load some_server var with hosts to target for configuration
   set_stats:
