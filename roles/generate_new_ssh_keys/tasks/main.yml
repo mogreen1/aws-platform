@@ -8,7 +8,9 @@
   loop: "{{users}}"
   register: r_new_keys
 
-
+- name: initialize bastion_server variable
+  set_fact:
+    bastion_server: ""
 
 - name: load target_hosts list with hosts to target for configuration
   set_stats:
@@ -19,5 +21,5 @@
     
 - name: does bastion server work before the next play is run?
   debug:
-    var: ansible_stats.data.bastion_server
+    var: bastion_server
       
