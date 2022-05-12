@@ -23,5 +23,5 @@
     
 - name: does bastion server work before the next play is run?
   debug:
-    var: ansible_stats.data.bastion_server
+    var: bastion_server
       
