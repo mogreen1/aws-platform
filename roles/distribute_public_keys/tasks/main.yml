@@ -7,7 +7,7 @@
 
 - name: show key data
   debug:
-    var: hostvars[bastion_server]['r_new_keys']}} #".comment}}: {{hostvars['Name_bastion']user_key_data.public_key}}"
+    var: bastion_server
 
 #- name: create a directory to store the file
 #  file:
