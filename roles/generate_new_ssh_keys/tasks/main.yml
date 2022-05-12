@@ -11,17 +11,19 @@
 - name: initialize bastion_server variable
   set_fact:
     bastion_server: "{{inventory_hostname}}"
+  delegate_to: localhost
 
 - name: load target_hosts list with hosts to target for configuration
   set_stats:
     data: 
       some_server: "{{bastion_server}}"
+    delegate_to: localhost
       
-- name: what is the value of inventory_hostname    
+- name: what is the value some_server  
   debug:
-    var: inventory_hostname
+    var: hostvars['localhost']['ansible_facts']
     
 - name: does bastion server work before the next play is run?
   debug:
-    var: hostvars['localhost']some_server
+    var: hostvars['localhost']['ansible_facts']['some_server']
       
