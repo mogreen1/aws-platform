@@ -15,4 +15,9 @@
     data: 
       bastion_server: "{{inventory_hostname}}"
     per_host: yes
+    
+    
+- name: does bastion server work before the next play is run?
+  debug:
+    var: bastion_server
       
