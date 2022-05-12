@@ -16,7 +16,7 @@
 #     - server3
 ---
 - name: rotatate ssh key demo
-  hosts: Name_bastion 
+  hosts: local_host, Name_bastion 
   vars:
     users:
       - usera
