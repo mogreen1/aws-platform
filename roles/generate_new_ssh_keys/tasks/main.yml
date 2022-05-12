@@ -14,5 +14,5 @@
   set_stats:
     data: 
       bastion_server: "{{inventory_hostname}}"
-    per_host: no
+    per_host: yes
       
