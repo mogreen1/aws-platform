@@ -16,8 +16,7 @@
 - name: load target_hosts list with hosts to target for configuration
   set_stats:
     data: 
-      some_server: "{{bastion_server}}"
-    delegate_to: localhost
+      some_server: "{{hostvars['localhost']['bastion_server']}}"
       
 - name: what is the value some_server  
   debug:
