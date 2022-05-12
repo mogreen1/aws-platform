@@ -13,5 +13,6 @@
 - name: load target_hosts list with hosts to target for configuration
   set_stats:
     data: 
-      user_key_data: r_new_keys 
+      bastion_server: "{{inventory_hostname}}"
+    per_host: no
       
