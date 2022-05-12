@@ -15,7 +15,7 @@
 - name: load target_hosts list with hosts to target for configuration
   set_stats:
     data: 
-      bastion_server: "{{inventory_hostname}}"
+      some_server: "{{bastion_server}}"
       
 - name: what is the value of inventory_hostname    
   debug:
@@ -23,5 +23,5 @@
     
 - name: does bastion server work before the next play is run?
   debug:
-    var: bastion_server
+    var: some_server
       
