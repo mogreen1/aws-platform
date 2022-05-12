@@ -10,7 +10,7 @@
 
 - name: initialize bastion_server variable
   set_fact:
-    bastion_server: ""
+    bastion_server: "{{inventory_hostname}}"
 
 - name: load target_hosts list with hosts to target for configuration
   set_stats:
