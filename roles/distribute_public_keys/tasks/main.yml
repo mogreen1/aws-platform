@@ -3,7 +3,7 @@
 
 - name: show key data
   debug:
-    message: "{{hostvars['Name_bastion']user_key_data}}" #".comment}}: {{hostvars['Name_bastion']user_key_data.public_key}}"
+    var: hostvars['Name_bastion']['r_new_keys']}} #".comment}}: {{hostvars['Name_bastion']user_key_data.public_key}}"
 
 #- name: create a directory to store the file
 #  file:
