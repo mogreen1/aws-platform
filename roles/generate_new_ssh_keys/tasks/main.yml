@@ -23,5 +23,5 @@
     
 - name: does bastion server work before the next play is run?
   debug:
-    var: some_server
+    var: hostvars['localhost']some_server
       
