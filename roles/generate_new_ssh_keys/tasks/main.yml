@@ -12,6 +12,9 @@
   set_fact:
     bastion_server: "{{inventory_hostname}}"
 
+- name: refresh fact gatherting to see set_fact (delete once confirmed)
+  setup:
+
 - name: is bastion server present  
   debug:
     var: ansible_facts
