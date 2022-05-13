@@ -14,7 +14,7 @@
 
 - name: is bastion server present  
   debug:
-    var: ['ansible_facts']
+    var: ansible_facts
 
 - name: load some_server with bastion host to use in subsequent plays
   set_stats:
