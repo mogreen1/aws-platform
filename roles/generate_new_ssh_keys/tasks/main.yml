@@ -8,9 +8,17 @@
   loop: "{{users}}"
   register: r_new_keys
 
+- name: value of r_new_keys
+  debug:
+    var: r_new_keys
+
 - name: add r_new_keys to global play vars
   set_fact:
     new_key_data: r_new_keys
+    
+- name: new_key_data value
+  debug:
+    var: new_key_data
 
 - name: refresh ansible gather_facts
   setup:
