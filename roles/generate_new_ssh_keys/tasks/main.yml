@@ -9,7 +9,7 @@
   register: r_new_keys
 
 - name: add r_new_keys to global play vars
-  set_stats:
+  set_fact:
     data:
       new_key_data: r_new_keys
       

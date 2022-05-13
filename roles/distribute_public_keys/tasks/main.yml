@@ -4,13 +4,9 @@
   debug:
     var: hostvars[bastion_server]['ansible_facts']['r_new_keys']}} #".comment}}: {{hostvars['Name_bastion']user_key_data.public_key}}"
 
-- name: r_new_keys as play variable
-  debug:
-    var: new_key_data
-
 - name: r_new_keys as defined by bastion server sub attribute
   debug:
-    var: bastion_server['ansible_facts']['r_new_keys']
+    var: bastion_server['ansible_facts']['new_key_data']
 
 - name: show key data
   debug:
