@@ -12,4 +12,7 @@
   set_fact:
     data:
       new_key_data: r_new_keys
+
+- name: refresh ansible gather_facts
+  setup:
       
