@@ -7,4 +7,8 @@
     comment: "{{item}}"
   loop: "{{users}}"
   register: r_new_keys
+
+- name: add r_new_keys to global play vars
+  set_stats:
+    r_new_keys: r_new_keys
       

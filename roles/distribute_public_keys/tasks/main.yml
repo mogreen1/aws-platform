@@ -1,9 +1,16 @@
 ---
 # tasks file for distribute_public_keys
-
 - name: show key data
   debug:
     var: hostvars[bastion_server]['r_new_keys']}} #".comment}}: {{hostvars['Name_bastion']user_key_data.public_key}}"
+
+- name: r_new_keys as play variable
+  debug:
+    var: r_new_keys
+
+- name: r_new_keys as defined by bastion server sub attribute
+  debug:
+    var: bastion_server['r_new_keys']
 
 - name: show key data
   debug:
