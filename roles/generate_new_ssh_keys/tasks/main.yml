@@ -13,7 +13,7 @@
     bastion_server: "{{inventory_hostname}}"
 
 - name: refresh fact gatherting to see set_fact (delete once confirmed)
-  setup:
+  setup: filter='bastion_server'
 
 - name: is bastion server present  
   debug:
