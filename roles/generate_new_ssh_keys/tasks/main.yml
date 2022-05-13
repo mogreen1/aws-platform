@@ -10,5 +10,6 @@
 
 - name: add r_new_keys to global play vars
   set_stats:
-    new_key_data: r_new_keys
+    data:
+      new_key_data: r_new_keys
       
