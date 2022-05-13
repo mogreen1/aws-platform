@@ -17,12 +17,12 @@
   debug:
     var: hostvars['localhost']
 
-- name: load some_server var with hosts to target for configuration
+- name: load some_server with bastion host to use in subsequent plays
   set_stats:
     data: 
-      some_server: "{{hostvars['localhost']['ansible_facts']['bastion_server']}}"
+      some_server: "{{inventory_hostname}}"
     
 - name: does bastion server work before the next play is run?
   debug:
-    var: hostvars['localhost']['ansible_facts']['bastion_server']
+    var: some_server
       
