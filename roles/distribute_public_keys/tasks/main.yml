@@ -8,7 +8,7 @@
 - name: show key data
   debug:
     var: bastion_server
-  when: inventroy_hostname != bastion_server
+  when: inventory_hostname != bastion_server
 
 #- name: create a directory to store the file
 #  file:
