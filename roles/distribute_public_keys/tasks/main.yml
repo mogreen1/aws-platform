@@ -7,7 +7,7 @@
 
 - name: loop trhough r_new_keys 
   debug:
-    var: item.[index]['comment']
+    var: item[index]['comment']
   loop: "{{ hostvars[bastion_server]['r_new_keys']['results'] }}"
 
 # name: show key data
