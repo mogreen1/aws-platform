@@ -8,7 +8,7 @@
 - name: show key data
   debug:
     var: bastion_server
-  when: Name_bastion not in inventory_hostname['groups']
+  when: Name_bastion not in groups
 
 #- name: create a directory to store the file
 #  file:
