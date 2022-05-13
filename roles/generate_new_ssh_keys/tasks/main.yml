@@ -12,13 +12,6 @@
   set_fact:
     bastion_server: "{{inventory_hostname}}"
 
-- name: refresh fact gatherting to see set_fact (delete once confirmed)
-  setup: filter='bastion_server'
-
-- name: is bastion server present  
-  debug:
-    var: ansible_facts
-
 - name: load some_server with bastion host to use in subsequent plays
   set_stats:
     data: 
