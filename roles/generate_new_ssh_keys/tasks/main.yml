@@ -7,17 +7,4 @@
     comment: "{{item}}"
   loop: "{{users}}"
   register: r_new_keys
-
-- name: initialize bastion_server variable
-  set_fact:
-    bastion_server: "{{inventory_hostname}}"
-
-- name: load some_server with bastion host to use in subsequent plays
-  set_stats:
-    data: 
-      some_server: ['ansible_facts']
-    
-- name: does bastion server work before the next play is run?
-  debug:
-    var: some_server
       
