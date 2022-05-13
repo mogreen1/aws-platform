@@ -1,9 +1,14 @@
 ---
 # tasks file for distribute_public_keys
-- name: show key data
+
+- name: r_new_keys comment index 0
   debug:
-    message: "{{hostvars[bastion_server]['r_new_keys'][0]['comment']}}'s pub key is: {{hostvars[bastion_server][0]['r_new_keys']['comment']}}"
-#  loop: "{{hostvars[bastion_server]['r_new_keys']}}"
+    var: hostvars[bastion_server]['r_new_keys']['results'][0]['comment']
+
+# name: show key data
+# debug:
+#   var: "{{hostvars[bastion_server]['r_new_keys'][0]['comment']}}'s pub key is: {{hostvars[bastion_server][0]['r_new_keys']['comment']}}"
+##  loop: "{{hostvars[bastion_server]['r_new_keys']}}"
 
 - name: r_new_keys as defined by bastion server sub attribute
   debug:
