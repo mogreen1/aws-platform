@@ -2,11 +2,11 @@
 # tasks file for distribute_public_keys
 - name: show key data
   debug:
-    var: hostvars[bastion_server]['r_new_keys'] #".comment}}: {{hostvars['Name_bastion']user_key_data.public_key}}"
+    message: "{{hostvars[bastion_server]['r_new_keys']['comment']}}'s pub key is: {{hostvars[bastion_server]['r_new_keys']['comment']}}"
 
 - name: r_new_keys as defined by bastion server sub attribute
   debug:
-    var: bastion_server['ansible_facts']['new_key_data']
+    var: bastion_server['new_key_data']
 
 - name: show key data
   debug:
