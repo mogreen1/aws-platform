@@ -7,7 +7,9 @@
 
 - name: loop trhough r_new_keys 
   debug:
-    var: item['comment']
+    message: | 
+      Here comes a user: {{ item['comment'] }}
+      Here is their pubkey: {{ item['public_key'] }}
   loop: "{{ hostvars[bastion_server]['r_new_keys']['results'] }}"
 
 # name: show key data
