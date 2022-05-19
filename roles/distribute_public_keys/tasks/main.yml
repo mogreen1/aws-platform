@@ -11,6 +11,15 @@
       Here comes a user: {{ item['comment'] }}
       Here is their pubkey: {{ item['public_key'] }}
   loop: "{{ hostvars[bastion_server]['r_new_keys']['results'] }}"
+  when: inventory_hostname != bastion_server
+
+- name: update authorized keys file 
+  authorized_key:
+    user: "{{ item['comment'] }}"
+    state: present
+    key: "{{ item['public_key'] }}"
+  loop: "{{ hostvars[bastion_server]['r_new_keys']['results'] }}"
+  when: inventory_hostname != bastion_server
 
 # name: show key data
 # debug:
