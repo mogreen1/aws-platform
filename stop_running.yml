@@ -9,7 +9,7 @@
     - name: gather running instance information
       amazon.aws.ec2_instance_info:
         region: "{{ aws_region }}"
-        uptime: 60
+        uptime: 1
         filters:
           "tag:Env": "Dev"
           instance-state-name: [ "Running" ]
