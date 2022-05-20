@@ -19,7 +19,7 @@
     - amazon.aws
 
   tasks:
-    - name: Provision instance
+    - name: Provision ec2 instance in AWS
       amazon.aws.ec2_instance:
         region: "{{ region }}"
         state: started
@@ -42,7 +42,7 @@
       set_fact:
         target_hosts: []
 
-    - name: load target_hosts list with hosts to target for configuration
+    - name: load new instances into target_hosts list (used in future plays for config)
       set_stats:
         data: 
           target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
@@ -53,7 +53,7 @@
         var: item.public_dns_name
       loop: "{{ ec2_instance_facts.instances }}"
 
-    - name: give instance time to initialize
+    - name: give instance time to initialize before configuration
       ansible.builtin.wait_for: 
         timeout: 150
 
