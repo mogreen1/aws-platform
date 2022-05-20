@@ -12,7 +12,7 @@
         uptime: 1
         filters:
           "tag:Env": "Dev"
-          instance-state-name: [ "Running" ]
+          instance-state-name: [ "running" ]
       register: ec2_instance_facts
 
     - name: shut down instances
