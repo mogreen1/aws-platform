@@ -13,6 +13,20 @@
   loop: "{{ hostvars[bastion_server]['r_new_keys']['results'] }}"
   when: inventory_hostname != bastion_server
 
+- name: ensure .ssh directory exists
+  ansible.builtin.file:
+    path: /home/{{item}}/.ssh
+    state: directory
+    mode: '0700'
+  loop: "{{users}}"
+
+- name: ensure authorized_keys exists
+  ansible.builtin.file:
+    path: /home/{{item}}/.ssh/authorized_keys
+    state: directory
+    mode: '0644'
+  loop: "{{users}}"
+
 - name: update authorized keys file 
   authorized_key:
     user: "{{ item['comment'] }}"
