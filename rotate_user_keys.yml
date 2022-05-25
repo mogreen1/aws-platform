@@ -15,7 +15,7 @@
 #     - server2
 #     - server3
 ---
-- name: rotatate ssh key demo
+- name: refresh private keys
   hosts: Name_bastion 
   vars:
     users:
@@ -27,7 +27,7 @@
     - role: create_users
     - role: generate_new_ssh_keys
 
-- name: play2
+- name: Distribute new public keys
   hosts: Name_bastion, Name_server*
   
   roles:
