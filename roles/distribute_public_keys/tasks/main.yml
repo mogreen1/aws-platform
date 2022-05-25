@@ -22,7 +22,7 @@
     msg: | 
       Here comes a user: {{ item['comment'] }}
       Here is their pubkey: {{ item['public_key'] }}
-  loop: "{{ hostvars[bastion_server]['r_new_keys']['results'] }}"
+  loop: "{{ hostvars[bastion_server]['new_key_data'] }}"
   when: inventory_hostname != bastion_server
 
 - name: ensure .ssh directory exists
@@ -44,7 +44,7 @@
     user: "{{ item['comment'] }}"
     state: present
     key: "{{ item['public_key'] }}"
-  loop: "{{ hostvars[bastion_server]['r_new_keys']['results'] }}"
+  loop: "{{ hostvars[bastion_server]['new_key_data']}}"
   when: inventory_hostname != bastion_server
 
 # name: show key data
