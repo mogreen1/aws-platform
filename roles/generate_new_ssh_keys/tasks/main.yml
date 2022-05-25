@@ -14,10 +14,10 @@
 
 - name: add r_new_keys to global play vars
   set_fact: 
-    new_key_data: r_new_keys.results
+    new_key_data: "{{r_new_keys.results}}"
 
-- name: refresh ansible gather_facts
-  setup:
+#- name: refresh ansible gather_facts
+#  setup:
 
 - name: new_key_data value
   debug:
