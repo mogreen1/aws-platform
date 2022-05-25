@@ -19,7 +19,5 @@
 #- name: refresh ansible gather_facts
 #  setup:
 
-- name: new_key_data value
-  debug:
-    var: new_key_data
+
  

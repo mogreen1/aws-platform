@@ -1,9 +1,13 @@
 ---
 # tasks file for distribute_public_keys
 
+- name: new_key_data value
+  debug:
+    var: new_key_data
+
 - name: r_new_keys comment index 0
   debug:
-    var: hostvars[bastion_server]['new_key_data']['results'][0]['comment']
+    var: hostvars[bastion_server]['new_key_data'][0]['comment']
 
 - name: loop trhough r_new_keys 
   debug:
