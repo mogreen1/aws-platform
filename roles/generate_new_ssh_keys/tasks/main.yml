@@ -15,7 +15,7 @@
 - name: add r_new_keys to global play vars
   set_stats:
     data: 
-      new_key_data: r_new_keys
+      new_key_data: r_new_keys.result
     per_host: yes
     
 - name: new_key_data value
