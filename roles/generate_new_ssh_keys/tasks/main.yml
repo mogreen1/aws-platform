@@ -18,8 +18,8 @@
     
 - name: new_key_data value
   debug:
-    var: new_key_data.
-
+    var: new_key_data.comment
+    
 - name: refresh ansible gather_facts
   setup:
       
