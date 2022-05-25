@@ -5,6 +5,10 @@
   debug:
     var: new_key_data
 
+- name: what are my host Name_server
+  debug:
+    var: inventory_hostname
+
 - name: r_new_keys comment index 0
   debug:
     var: hostvars[bastion_server]['new_key_data'][0]['comment']
