@@ -22,7 +22,7 @@
     msg: | 
       Here comes a user: {{ item['comment'] }}
       Here is their pubkey: {{ item['public_key'] }}
-  loop: "{{ hostvars[bastion_server]['ansible_facts']['new_key_data'] }}"
+  loop: "{{ hostvars[bastion_server] }}"
   when: inventory_hostname != bastion_server
 
 - name: ensure .ssh directory exists
