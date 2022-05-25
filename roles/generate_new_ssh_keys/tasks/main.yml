@@ -13,15 +13,13 @@
     var: r_new_keys
 
 - name: add r_new_keys to global play vars
-  set_stats:
-    data: 
-      new_key_data: r_new_keys.results
-    per_host: yes
-    
-- name: new_key_data value
-  debug:
-    var: new_key_data
+  set_fact: 
+    new_key_data: r_new_keys.results
 
 - name: refresh ansible gather_facts
   setup:
-      
+
+- name: new_key_data value
+  debug:
+    var: new_key_data
+ 
