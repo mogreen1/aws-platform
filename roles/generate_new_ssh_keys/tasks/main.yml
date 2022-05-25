@@ -13,8 +13,10 @@
     var: r_new_keys
 
 - name: add r_new_keys to global play vars
-  set_fact:
-    new_key_data: r_new_keys
+  set_stats:
+    data: 
+      new_key_data: r_new_keys
+    per_host: yes
     
 - name: new_key_data value
   debug:
