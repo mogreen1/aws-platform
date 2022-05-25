@@ -16,6 +16,10 @@
   set_fact: 
     new_key_data: "{{r_new_keys.results}}"
 
+- set_stats: 
+    data: 
+      bastion_server: "{{ inventory_hostname }}"
+
 #- name: refresh ansible gather_facts
 #  setup:
 

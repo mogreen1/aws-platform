@@ -5,6 +5,10 @@
   debug:
     var: new_key_data
 
+- name: did bastion_server get set properly?
+  debug:
+    var: bastion_server
+
 - name: what are my host Name_server
   debug:
     var: inventory_hostname
