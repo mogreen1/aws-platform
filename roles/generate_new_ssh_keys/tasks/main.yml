@@ -18,6 +18,10 @@
 
 - set_fact: 
     bastion_server: "{{ inventory_hostname }}"
+  delegate_to: localhost
+  
+- debug:
+    var: hostvars['localhost']['ansible_facts']['bastion_server']
     
 #- name: refresh ansible gather_facts
 #  setup:
