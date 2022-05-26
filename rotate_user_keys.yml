@@ -29,6 +29,7 @@
 
 - name: Distribute new public keys
   hosts: Name_bastion, Name_server*
+  show_custom_stats: yes
   
   roles:
     - role: distribute_public_keys
