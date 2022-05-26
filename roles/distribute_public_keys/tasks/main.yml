@@ -1,6 +1,9 @@
 ---
 # tasks file for distribute_public_keys
 
+- setup: 
+  when: inventory_hostname == bastion_server
+
 - name: new_key_data value
   debug:
     var: new_key_data
