@@ -19,6 +19,7 @@
 - set_stats: 
     data: 
       bastion_server: "{{ inventory_hostname }}"
+    per_host: yes
 
 #- name: refresh ansible gather_facts
 #  setup:
