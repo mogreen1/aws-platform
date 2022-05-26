@@ -9,9 +9,9 @@
   debug:
     var: bastion_server
 
-- name: what are my host Name_server
+- name: what are my bastion_server hostvars
   debug:
-    var: inventory_hostname
+    var: hostvars[bastion_server]['ansible_facts']
 
 - name: r_new_keys comment index 0
   debug:
@@ -22,7 +22,7 @@
     msg: | 
       Here comes a user: {{ item['comment'] }}
       Here is their pubkey: {{ item['public_key'] }}
-  loop: "{{ hostvars[bastion_server] }}"
+  loop: "{{ hostvars[bastion_server]['ansible_facts']['new_key_data'] }}"
   when: inventory_hostname != bastion_server
 
 - name: ensure .ssh directory exists
