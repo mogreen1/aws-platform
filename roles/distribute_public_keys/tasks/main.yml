@@ -11,7 +11,7 @@
 
 - name: what are my bastion_server hostvars
   debug:
-    var: hostvars[bastion_server]['ansible_facts']
+    var: hostvars[bastion_server]
 
 - name: r_new_keys comment index 0
   debug:
