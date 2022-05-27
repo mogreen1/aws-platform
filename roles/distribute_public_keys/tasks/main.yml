@@ -1,24 +1,6 @@
 ---
 # tasks file for distribute_public_keys
 
-- name: new_key_data value
-  debug:
-    var: new_key_data
-
-- name: did bastion_server get set properly?
-  debug:
-    var: bastion_server
-
-- debug:
-    var: hostvars[bastion_server]
-    
-- debug:
-    var: hostvars[bastion_server]['new_key_data'][0]
-
-#- name: what are my bastion_server hostvars
-#  debug:
-#    var: hostvars[bastion_server]
-
 - name: r_new_keys comment index 0
   debug:
     var: hostvars[bastion_server]['new_key_data'][0]['comment']
@@ -28,29 +10,29 @@
     msg: | 
       Here comes a user: {{ item['comment'] }}
       Here is their pubkey: {{ item['public_key'] }}
-  loop: "{{ hostvars[bastion_server]['ansible_facts']['r_new_user_data']['results'] }}"
+  loop: "{{ hostvars[bastion_server]['new_key_data'] }}"
   when: inventory_hostname != bastion_server
 
 - name: ensure .ssh directory exists
   ansible.builtin.file:
-    path: /home/{{item}}/.ssh
+    path: /home/{{item.comment}}/.ssh
     state: directory
     mode: '0700'
-  loop: "{{users}}"
+  loop: "hostvars[bastion_server]['new_key_data']"
 
 - name: ensure authorized_keys exists
   ansible.builtin.file:
-    path: /home/{{item}}/.ssh/authorized_keys
-    state: directory
-    mode: '0644'
-  loop: "{{users}}"
+    path: /home/{{item.comment}}/.ssh/authorized_keys
+    state: absent
+#    mode: '0644'
+  loop: "hostvars[bastion_server]['new_key_data']"
 
 - name: update authorized keys file 
   authorized_key:
     user: "{{ item['comment'] }}"
     state: present
     key: "{{ item['public_key'] }}"
-  loop: "{{ hostvars[bastion_server]['ansible_facts']['new_key_data']}}"
+  loop: "{{ hostvars[bastion_server]['new_key_data']}}"
   when: inventory_hostname != bastion_server
 
 # name: show key data
@@ -61,11 +43,6 @@
 - name: r_new_keys as defined by bastion server sub attribute
   debug:
     var: bastion_server['new_key_data']
-
-- name: show key data
-  debug:
-    var: bastion_server
-  when: inventory_hostname != bastion_server
 
 #- name: create a directory to store the file
 #  file:
