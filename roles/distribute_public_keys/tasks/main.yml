@@ -19,6 +19,7 @@
     state: directory
     mode: '0700'
   loop: "{{hostvars[bastion_server]['new_key_data']}}"
+  when: inventory_hostname != bastion_server
 
 - name: ensure authorized_keys exists
   ansible.builtin.file:
@@ -26,6 +27,7 @@
     state: file
     mode: '0644'
   loop: "{{hostvars[bastion_server]['new_key_data']}}"
+  when: inventory_hostname != bastion_server
 
 - name: add authorized_key
   lineinfile:
@@ -36,7 +38,8 @@
     group: "{{item.comment}}"
     mode: '0644'
   loop: "{{hostvars[bastion_server]['new_key_data']}}"
-
+  when: inventory_hostname != bastion_server
+  
 #- name: update authorized keys file 
 #  authorized_key:
 #    user: "{{ item['comment'] }}"
