@@ -21,7 +21,7 @@
 
 - name: r_new_keys comment index 0
   debug:
-    var: hostvars[bastion_server]['ansible_facts']['r_new_user_data']['results'][0]['comment']
+    var: hostvars[bastion_server]['ansible_facts']['r_new_user_data']['results'][0]
 
 - name: loop trhough r_new_keys 
   debug:
