@@ -23,17 +23,27 @@
 - name: ensure authorized_keys exists
   ansible.builtin.file:
     path: /home/{{item.comment}}/.ssh/authorized_keys
-    state: absent
-#    mode: '0644'
+    state: present
+    mode: '0644'
   loop: "{{hostvars[bastion_server]['new_key_data']}}"
 
-- name: update authorized keys file 
-  authorized_key:
-    user: "{{ item['comment'] }}"
-    state: present
-    key: "{{ item['public_key'] }}"
-  loop: "{{ hostvars[bastion_server]['new_key_data']}}"
-  when: inventory_hostname != bastion_server
+- name: add authorized_key
+  line_in_file:
+    path: "/home/{{item.comment}}/.ssh/authorized_keys"
+    regexp: '^ssh-rsa'
+    line: "{{ item['public_key'] }}"
+    owner: "{{item.comment}}"
+    group: "{{item.comment}}"
+    mode: '0644'
+  loop: "{{hostvars[bastion_server]['new_key_data']}}"
+
+#- name: update authorized keys file 
+#  authorized_key:
+#    user: "{{ item['comment'] }}"
+#    state: present
+#    key: "{{ item['public_key'] }}"
+#  loop: "{{ hostvars[bastion_server]['new_key_data']}}"
+#  when: inventory_hostname != bastion_server
 
 # name: show key data
 # debug:
