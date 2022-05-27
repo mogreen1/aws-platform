@@ -13,7 +13,7 @@
     var: hostvars[bastion_server]
     
 - debug:
-    var: hostvars[bastion_server]['ansible_facts']
+    var: hostvars[bastion_server]['ansible_facts']['new_key_data'][0]
 
 #- name: what are my bastion_server hostvars
 #  debug:
@@ -21,7 +21,7 @@
 
 - name: r_new_keys comment index 0
   debug:
-    var: hostvars[bastion_server]['ansible_facts']['r_new_user_data']
+    var: hostvars[bastion_server]['ansible_facts']['new_key_data'][0]['comment']
 
 - name: loop trhough r_new_keys 
   debug:
