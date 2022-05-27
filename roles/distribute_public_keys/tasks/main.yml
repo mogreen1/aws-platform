@@ -28,7 +28,7 @@
   loop: "{{hostvars[bastion_server]['new_key_data']}}"
 
 - name: add authorized_key
-  line_in_file:
+  lineinfile:
     path: "/home/{{item.comment}}/.ssh/authorized_keys"
     regexp: '^ssh-rsa'
     line: "{{ item['public_key'] }}"
