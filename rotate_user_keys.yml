@@ -28,7 +28,7 @@
     - role: generate_new_ssh_keys
 
 - name: Distribute new public keys
-  hosts: Name_bastion, Name_server*
+  hosts: Name_bastion, Name_server1
   
   roles:
     - role: distribute_public_keys

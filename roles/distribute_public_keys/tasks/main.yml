@@ -25,6 +25,8 @@
   ansible.builtin.file:
     path: /home/{{item.comment}}/.ssh/authorized_keys
     state: file
+    owner: "{{item.comment}}"
+    group: "{{item.comment}}"
     mode: '0644'
   loop: "{{hostvars[bastion_server]['new_key_data']}}"
   when: inventory_hostname != bastion_server
@@ -39,7 +41,7 @@
     mode: '0644'
   loop: "{{hostvars[bastion_server]['new_key_data']}}"
   when: inventory_hostname != bastion_server
-  
+
 #- name: update authorized keys file 
 #  authorized_key:
 #    user: "{{ item['comment'] }}"
