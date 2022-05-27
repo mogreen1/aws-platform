@@ -18,7 +18,7 @@
     path: /home/{{item.comment}}/.ssh
     state: directory
     mode: '0700'
-  loop: "hostvars[bastion_server]['new_key_data']"
+  loop: "{{hostvars[bastion_server]['new_key_data']}}"
 
 - name: ensure authorized_keys exists
   ansible.builtin.file:
