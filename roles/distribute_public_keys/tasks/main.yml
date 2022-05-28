@@ -5,6 +5,11 @@
 #  debug:
 #    var: hostvars[bastion_server]['new_key_data'][0]['comment']
 
+- name: ensure users exists
+  user:
+    name: "{{item}}"
+  loop: "{{users}}"
+  
 - name: loop trhough r_new_keys 
   debug:
     msg: | 

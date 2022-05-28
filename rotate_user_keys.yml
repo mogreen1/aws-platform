@@ -17,11 +17,6 @@
 ---
 - name: refresh private keys
   hosts: Name_bastion 
-  vars:
-    users:
-      - usera
-      - userb
-      - userc
 
   roles: 
     - role: create_users
