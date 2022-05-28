@@ -15,11 +15,16 @@
 #     - server2
 #     - server3
 ---
-- name: refresh private keys
-  hosts: Name_bastion 
+- name: create users
+  hosts: Name_bastion, Name_server1
 
   roles: 
     - role: create_users
+    
+- name: refresh private keys
+  hosts: Name_bastion
+
+  roles: 
     - role: generate_new_ssh_keys
 
 - name: Distribute new public keys
