@@ -24,7 +24,7 @@
 - name: ensure authorized_keys exists
   ansible.builtin.file:
     path: /home/{{item.comment}}/.ssh/authorized_keys
-    state: file
+    state: touch
     owner: "{{item.comment}}"
     group: "{{item.comment}}"
     mode: '0644'
