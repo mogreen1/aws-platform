@@ -8,8 +8,9 @@
 - name: ensure users exists
   user:
     name: "{{item}}"
+    shell: /bin/bash
   loop: "{{users}}"
-  
+
 - name: loop trhough r_new_keys 
   debug:
     msg: | 
