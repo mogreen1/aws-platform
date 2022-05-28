@@ -2,7 +2,7 @@
 # tasks file for generate_new_ssh_keys
 - name: Force regenerate an OpenSSH keypair if it already exists
   community.crypto.openssh_keypair:
-    path: /home/{{item}}/id_rsa
+    path: /home/{{item}}/.ssh/id_rsa
     force: True
     comment: "{{item}}"
   loop: "{{users}}"
