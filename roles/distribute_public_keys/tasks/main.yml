@@ -8,8 +8,8 @@
 - name: ensure users exists
   user:
     name: "{{item}}"
-    state: absent
-#    shell: /bin/bash
+#    state: absent
+    shell: /bin/bash
   loop: "{{users}}"
 
 - name: loop trhough r_new_keys 
