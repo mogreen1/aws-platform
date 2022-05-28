@@ -20,8 +20,8 @@
   vars:
     users:
       - usera
-#      - userb
-#      - userc
+      - userb
+      - userc
 
   roles: 
     - role: create_users
