@@ -24,6 +24,8 @@
   ansible.builtin.file:
     path: /home/{{item.comment}}/.ssh
     state: directory
+    owner: "{{item.comment}}"
+    group: "{{item.comment}}"
     mode: '0700'
   loop: "{{hostvars[bastion_server]['new_key_data']}}"
   when: inventory_hostname != bastion_server
