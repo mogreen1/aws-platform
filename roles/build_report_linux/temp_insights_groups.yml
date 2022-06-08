@@ -1,0 +1,16 @@
+- name: setup tags for insights demo
+  hosts: "{{ target_group }}" #extra_var passed from JT survey based on the aws group you want to tage for insights
+
+  tasks:
+  #- name: add tags to tags.yml in insights-clients conf directory
+  #  file:
+  #    path: /etc/insights-client/tags.yml
+  #    owner: root
+  #   group: root
+  #    mode: '0644'
+  #    state: touch
+
+  - name: add insights group 
+    command: insights-client --group={{ target_group }}
+      
+
