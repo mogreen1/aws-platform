@@ -1,0 +1,6 @@
+- name: initial setup of groups for insights
+  hosts: "{{ target_group }}"  # provided in JT survey (must match an aws group)
+
+  tasks:
+  - name: add group to be used in insights
+    command: insights-client --group={{target_group}}
