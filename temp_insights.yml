@@ -2,5 +2,7 @@
   hosts: "{{ target_group }}"  # provided in JT survey (must match an aws group)
 
   tasks:
-  - name: add group to be used in insights
+  - name: add group {{ target_group }} to be used in insights
     command: insights-client --group={{target_group}}
+    ignore_errors: yes
+
