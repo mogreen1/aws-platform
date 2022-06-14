@@ -59,15 +59,18 @@
 
   - name: add group {{ item }} to be used in insights
     lineinfile: 
-      line: "group: {{ item }}"
+      line: "{{item.key}}: {{ item.value }}"
       path: /etc/insights-client/tags.yaml
       group: root
       owner: root
       mode: 0644
     loop:
-      - "{{ app_tag }}"
-      - "{{ env_tag }}"
-      - "{{ name_tag }}"
+      - key: application
+        value: "{{ app_tag }}"
+      - key: environment
+        value: "{{ env_tag }}"
+      - key: name
+        value: "{{ name_tag }}"
     ignore_errors: yes
 
   - name: update insights data
