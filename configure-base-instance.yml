@@ -60,9 +60,9 @@
   - name: add group {{ item }} to be used in insights
     command: insights-client --group={{ item }}
     loop:
-      - app_tag
-      - env_tag
-      - name_tag
+      - "{{ app_tag }}"
+      - "{{ env_tag }}"
+      - "{{ name_tag }}"
     ignore_errors: yes
 
   - name: update insights data
@@ -91,3 +91,4 @@
       append: yes
       password: "{{ lookup('env', 'PORTAL_PASSWORD') | password_hash('sha512') }}"
       update_password: always
+      #PORTAL_USERNAME and PORTAL_PASSWORD are defined as custom credential
