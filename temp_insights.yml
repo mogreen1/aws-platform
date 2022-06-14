@@ -4,13 +4,13 @@
   tasks:
   - name: add group {{ target_group }} to be used in insights
     lineinfile: 
-      line: group: {{ target_group }}
+      line: "group: {{ target_group }}"
       path: /etc/insights-client/tags.yaml
       group: root
       owner: root
       mode: 0644
     ignore_errors: yes
 
-    command: insights-client --group={{target_group}}
-    ignore_errors: yes
+#  - command: insights-client --group={{target_group}}
+#    ignore_errors: yes
 
