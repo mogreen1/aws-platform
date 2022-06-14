@@ -4,7 +4,7 @@
   tasks:
   - name: add group {{ target_group }} to be used in insights
     lineinfile: 
-      line: "group: {{ target_group }}"
+      line: group: {{ target_group }}
       path: /etc/insights-client/tags.yaml
       group: root
       owner: root
