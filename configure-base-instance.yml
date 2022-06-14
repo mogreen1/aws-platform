@@ -58,7 +58,12 @@
       timeout: 60
 
   - name: add group {{ item }} to be used in insights
-    command: insights-client --group={{ item }}
+    lineinfile: 
+      line: "group: {{ item }}"
+      path: /etc/insights-client/tags.yaml
+      group: root
+      owner: root
+      mode: 0644
     loop:
       - "{{ app_tag }}"
       - "{{ env_tag }}"
