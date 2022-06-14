@@ -1,10 +1,16 @@
 - name: initial setup of groups for insights
-  hosts: "{{ target_group }}"  # provided in JT survey (must match an aws group)
+  hosts: "{{ group_value }}"  # provided in JT survey (must match an aws group)
 
   tasks:
+  - name: ensure tags.yml exists
+    file:
+      state: touch
+      dest: /etc/insights-client/tags.yaml
+      
   - name: add group {{ target_group }} to be used in insights
     lineinfile: 
-      line: "group: {{ target_group }}"
+      line: "{{group_key}}: {{ group_value }}"
+      regexp: "^{{group_key}}}"
       path: /etc/insights-client/tags.yaml
       group: root
       owner: root
