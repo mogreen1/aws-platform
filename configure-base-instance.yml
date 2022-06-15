@@ -57,6 +57,14 @@
     ansible.builtin.wait_for: 
       timeout: 60
 
+  - name: ensure tags.yml exists
+    file:
+      state: touch
+      group: root
+      owner: root
+      mode: 0644
+      dest: /etc/insights-client/tags.yaml
+
   - name: add group {{ item }} to be used in insights
     lineinfile: 
       line: "{{item.key}}: {{ item.value }}"
