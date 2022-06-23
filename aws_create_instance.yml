@@ -19,6 +19,7 @@
     - amazon.aws
 
   tasks:
+    - name: show ami_id value
     - name: provision ec2 instance in AWS
       block:
         - name: Provision Windows ec2 instance in AWS
@@ -45,7 +46,7 @@
               Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
               </powershell>
           register: ec2_instance_facts
-          when: ami_id.windows2019 is defined
+          when: image_name == "windows2019"
 
       rescue:
         - name: Provision RHEL ec2 instance in AWS
