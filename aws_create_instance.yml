@@ -7,7 +7,7 @@
     ami_id:
       rhel84: ami-0635a8c4049019474
       rhel85: ami-06f1e6f8b3457ae7c
-      windows2016: ami-08aa543413d7bdc57
+      windows2019: ami-041306c411c38a789
     instance_size: m4.xlarge
     vpc_id: vpc-0b41ab809d8ee56f6
     ssh_key_name: aws-rhpds-20211028
@@ -19,24 +19,53 @@
     - amazon.aws
 
   tasks:
-    - name: Provision ec2 instance in AWS
-      amazon.aws.ec2_instance:
-        region: "{{ region }}"
-        state: started
-        key_name: "{{ ssh_key_name }}"
-        security_group: "{{ security_group_id }}"
-        instance_type: "{{ instance_size }}"
-        tags: 
-          Env: "{{ env_tag }}"
-          App: "{{ app_tag }}"
-          Name: "{{ name_tag }}"
-        image_id: "{{ ami_id[image_name] }}"
-        wait: true
-        vpc_subnet_id: "{{ subnet_id }}"
-        count: "{{ instance_count }}"
-        network:
-          assign_public_ip: yes
-      register: ec2_instance_facts
+    - name: provision ec2 instance in AWS
+      block:
+        - name: Provision Windows ec2 instance in AWS
+          amazon.aws.ec2_instance:
+            region: "{{ region }}"
+            state: started
+            key_name: "{{ ssh_key_name }}"
+            security_group: "{{ security_group_id }}"
+            instance_type: "{{ instance_size }}"
+            tags: 
+              Env: "{{ env_tag }}"
+              App: "{{ app_tag }}"
+              Name: "{{ name_tag }}"
+            image_id: "{{ ami_id[image_name] }}"
+            wait: true
+            vpc_subnet_id: "{{ subnet_id }}"
+            count: "{{ instance_count }}"
+            network:
+              assign_public_ip: yes
+            user_data: | 
+              <powershell>
+              $admin = [adsi]("WinNT://./administrator, user")
+              $admin.PSBase.Invoke("SetPassword", "myTempPassword123!")
+              Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
+              </powershell>
+          register: ec2_instance_facts
+          when: ami_id == "windows2019"
+
+      rescue:
+        - name: Provision RHEL ec2 instance in AWS
+          amazon.aws.ec2_instance:
+            region: "{{ region }}"
+            state: started
+            key_name: "{{ ssh_key_name }}"
+            security_group: "{{ security_group_id }}"
+            instance_type: "{{ instance_size }}"
+            tags: 
+              Env: "{{ env_tag }}"
+              App: "{{ app_tag }}"
+              Name: "{{ name_tag }}"
+            image_id: "{{ ami_id[image_name] }}"
+            wait: true
+            vpc_subnet_id: "{{ subnet_id }}"
+            count: "{{ instance_count }}"
+            network:
+              assign_public_ip: yes
+          register: ec2_instance_facts      
 
     - name: initialize target_hosts as an empty list
       set_fact:
