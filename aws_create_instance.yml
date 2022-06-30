@@ -65,6 +65,10 @@
       register: ec2_instance_facts      
       when: image_name is match("rhel*")
 
+    - name: show ec2_instance_facts information
+      debug:  
+        var: ec2_instance_facts
+
     - name: initialize target_hosts as an empty list
       set_fact:
         target_hosts: []
