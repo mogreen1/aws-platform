@@ -80,9 +80,14 @@
         value: "{{ name_tag }}"
     ignore_errors: yes
 
-  - name: update insights data
-    ansible.builtin.command: insights-client
-    ignore_errors: yes
+  - name: register system to insights
+    insights-register:
+      state: present
+      display-name: "{{ name_tag }}"
+
+#  - name: update insights data
+#    ansible.builtin.command: insights-client
+#    ignore_errors: yes
 
   - name: install webconsole aka cockpit
     ansible.builtin.yum:
