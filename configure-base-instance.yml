@@ -81,9 +81,12 @@
     ignore_errors: yes
 
   - name: register system to insights
-    insights-register:
-      state: present
-      display-name: "{{ name_tag }}"
+    shell: insights-client --register
+
+#  - name: register system to insights
+#    insights-register:
+#      state: present
+#      display-name: "{{ name_tag }}"
 
 #  - name: update insights data
 #    ansible.builtin.command: insights-client
