@@ -1,3 +1,10 @@
+- name: show instance info to determine os key value pair
+  ec2_instance_info: 
+  register: r_instance_info
+
+- debug:
+    var: r_instance_info
+
 - name: Config Status Message
   debug:
     msg: Windows Configuration is a work in progress, more to come soon
