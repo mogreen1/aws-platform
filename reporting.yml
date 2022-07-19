@@ -47,7 +47,7 @@
     - name: gather public IP address
       command: curl checkip.amazonaws.com
       register: web_server_pulic_ip
-      delegate_to: ip-10-0-0-66.ec2.internal
+      delegate_to: "{{ web_server }}"
 
     - name: URL to linux report
       debug:  
