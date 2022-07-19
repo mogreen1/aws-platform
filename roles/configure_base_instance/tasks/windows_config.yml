@@ -1,5 +1,5 @@
 - name: show instance info to determine os key value pair
-  ec2_instance_info: 
+  amazon.aws.ec2_instance_info: 
   register: r_instance_info
 
 - debug:
