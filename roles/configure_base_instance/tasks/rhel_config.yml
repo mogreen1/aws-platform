@@ -9,25 +9,29 @@
     path: /etc/yum/pluginconf.d/subscription-manager.conf
   become: true
 
-- name: unregister system from subscription manager
-  ansible.builtin.command: subscription-manager unregister
-  ignore_errors: yes
+- name: trying out become in a block
+  block:
+
+    - name: unregister system from subscription manager
+      ansible.builtin.command: subscription-manager unregister
+      ignore_errors: yes
+
+    - name: clear subscription-manager meta information
+      ansible.builtin.command: subscription-manager clean
+
+    - name: register system and attach rhel subscription
+      community.general.redhat_subscription:
+        state: present
+        username: "{{ lookup('env', 'PORTAL_USERNAME') }}"
+        password: "{{ lookup('env', 'PORTAL_PASSWORD') }}"
+        force_register: yes
+        pool_ids: "{{ subscription[subscription_name]}}"
+        # consider using activation key parameter instead (see examples in docs)
+
+    - name: make subscription-manager the default repo manager
+      ansible.builtin.shell: subscription-manager config --rhsm.manage_repos=1
   become: true
-  
-- name: clear subscription-manager meta information
-  ansible.builtin.command: subscription-manager clean
 
-- name: register system and attach rhel subscription
-  community.general.redhat_subscription:
-    state: present
-    username: "{{ lookup('env', 'PORTAL_USERNAME') }}"
-    password: "{{ lookup('env', 'PORTAL_PASSWORD') }}"
-    force_register: yes
-    pool_ids: "{{ subscription[subscription_name]}}"
-    # consider using activation key parameter instead (see examples in docs)
-
-- name: make subscription-manager the default repo manager
-  ansible.builtin.shell: subscription-manager config --rhsm.manage_repos=1
 
 - name: Enable AAP 2.1 rhsm repository in redehat.repo file
   community.general.rhsm_repository:
