@@ -1,6 +1,7 @@
 - name: show instance info to determine os key value pair
   amazon.aws.ec2_instance_info: 
   register: r_instance_info
+  delegate_to: localhost
 
 - debug:
     var: r_instance_info
