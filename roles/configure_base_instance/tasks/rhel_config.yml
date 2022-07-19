@@ -1,16 +1,19 @@
 - name: Disable rhui repositories
   ansible.builtin.shell: yum-config-manager --disable *rhui*
+  become: true
 
 - name: prevent rhui repos from reinstating on reboot
   lineinfile:
     regexp: '^disable_system_repos'
     line: 'disable_system_repos = 1'
     path: /etc/yum/pluginconf.d/subscription-manager.conf
+  become: true
 
 - name: unregister system from subscription manager
   ansible.builtin.command: subscription-manager unregister
   ignore_errors: yes
-
+  become: true
+  
 - name: clear subscription-manager meta information
   ansible.builtin.command: subscription-manager clean
 
