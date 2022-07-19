@@ -1,5 +1,6 @@
 - name: show instance info to determine os key value pair
   amazon.aws.ec2_instance_info: 
+    region: "{{ aws_region }}"
   register: r_instance_info
   delegate_to: localhost
 
