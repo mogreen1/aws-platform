@@ -57,7 +57,7 @@
         mode: 0644
         dest: /etc/insights-client/tags.yaml
 
-    - name: add group {{ item }} to be used in insights
+    - name: add groups to be used in insights
       lineinfile: 
         line: "{{item.key}}: {{ item.value }}"
         path: /etc/insights-client/tags.yaml
