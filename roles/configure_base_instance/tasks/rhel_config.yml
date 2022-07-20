@@ -14,7 +14,7 @@
 
     - name: unregister system from subscription manager
       ansible.builtin.command: subscription-manager unregister
-      ignore_errors: yes
+      ignore_errors: True
 
     - name: clear subscription-manager meta information
       ansible.builtin.command: subscription-manager clean
@@ -30,55 +30,53 @@
 
     - name: make subscription-manager the default repo manager
       ansible.builtin.shell: subscription-manager config --rhsm.manage_repos=1
-  become: true
 
+    - name: Enable AAP 2.1 rhsm repository in redehat.repo file
+      community.general.rhsm_repository:
+        name: ansible-automation-platform-2.1-for-rhel-8-x86_64-rpms
+        state: enabled
 
-- name: Enable AAP 2.1 rhsm repository in redehat.repo file
-  community.general.rhsm_repository:
-    name: ansible-automation-platform-2.1-for-rhel-8-x86_64-rpms
-    state: enabled
+    - name: install base packages
+      ansible.builtin.yum:
+        name: 
+          - ansible
+          - rhc-worker-playbook
+          - rhc
+        state: present
 
-- name: install base packages
-  ansible.builtin.yum:
-    name: 
-      - ansible
-      - rhc-worker-playbook
-      - rhc
-    state: present
+    - name: run Red Hat Connector
+      ansible.builtin.command: rhc connect -u {{ lookup('env', 'PORTAL_USERNAME') }} -p {{ lookup('env', 'PORTAL_PASSWORD') }}
 
-- name: run Red Hat Connector
-  ansible.builtin.command: rhc connect -u {{ lookup('env', 'PORTAL_USERNAME') }} -p {{ lookup('env', 'PORTAL_PASSWORD') }}
+    - name: give insights time to finish setup after running RHC
+      ansible.builtin.wait_for: 
+        timeout: 60
 
-- name: give insights time to finish setup after running RHC
-  ansible.builtin.wait_for: 
-    timeout: 60
+    - name: ensure tags.yml exists
+      file:
+        state: touch
+        group: root
+        owner: root
+        mode: 0644
+        dest: /etc/insights-client/tags.yaml
 
-- name: ensure tags.yml exists
-  file:
-    state: touch
-    group: root
-    owner: root
-    mode: 0644
-    dest: /etc/insights-client/tags.yaml
+    - name: add group {{ item }} to be used in insights
+      lineinfile: 
+        line: "{{item.key}}: {{ item.value }}"
+        path: /etc/insights-client/tags.yaml
+        group: root
+        owner: root
+        mode: 0644
+        loop:
+          - key: application
+            value: "{{ app_tag }}"
+          - key: environment
+            value: "{{ env_tag }}"
+          - key: name
+            value: "{{ name_tag }}"
+      ignore_errors: True
 
-- name: add group {{ item }} to be used in insights
-  lineinfile: 
-    line: "{{item.key}}: {{ item.value }}"
-    path: /etc/insights-client/tags.yaml
-    group: root
-    owner: root
-    mode: 0644
-  loop:
-    - key: application
-      value: "{{ app_tag }}"
-    - key: environment
-      value: "{{ env_tag }}"
-    - key: name
-      value: "{{ name_tag }}"
-  ignore_errors: yes
-
-- name: register system to insights
-  shell: insights-client --register
+    - name: register system to insights
+      shell: insights-client --register
 
 #  - name: register system to insights
 #    insights-register:
@@ -89,26 +87,28 @@
 #    ansible.builtin.command: insights-client
 #    ignore_errors: yes
 
-- name: install webconsole aka cockpit
-  ansible.builtin.yum:
-    name: cockpit
-    state: latest
+    - name: install webconsole aka cockpit
+      ansible.builtin.yum:
+        name: cockpit
+        state: latest
 
-- name: give cockpit time to finish instsalling
-  ansible.builtin.wait_for: 
-    timeout: 15
+    - name: give cockpit time to finish instsalling
+      ansible.builtin.wait_for: 
+        timeout: 15
     
-- name: start cockpit socket
-  ansible.builtin.service: 
-    name: cockpit.socket
-    enabled: yes
-    state: started
+    - name: start cockpit socket
+      ansible.builtin.service: 
+        name: cockpit.socket
+        enabled: yes
+        state: started
 
-- name: add {{ lookup('env', 'PORTAL_USERNAME') }} user
-  ansible.builtin.user:
-    name: "{{ lookup('env', 'PORTAL_USERNAME') }}"
-    groups: wheel
-    append: yes
-    password: "{{ lookup('env', 'PORTAL_PASSWORD') | password_hash('sha512') }}"
-    update_password: always
-    #PORTAL_USERNAME and PORTAL_PASSWORD are defined as custom credential
+    - name: add {{ lookup('env', 'PORTAL_USERNAME') }} user
+      ansible.builtin.user:
+        name: "{{ lookup('env', 'PORTAL_USERNAME') }}"
+        groups: wheel
+        append: yes
+        password: "{{ lookup('env', 'PORTAL_PASSWORD') | password_hash('sha512') }}"
+        update_password: always
+        #PORTAL_USERNAME and PORTAL_PASSWORD are defined as custom credential
+
+  become: true  
