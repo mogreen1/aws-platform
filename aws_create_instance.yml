@@ -9,7 +9,7 @@
 #    - amazon.aws
 
   tasks:
-    - name: Provision Windows ec2 instance in AWS
+    - name: Conditionally provision Windows ec2 instance in AWS
       amazon.aws.ec2_instance:
         region: "{{ region }}"
         state: started
@@ -35,7 +35,7 @@
       register: ec2_instance_facts_win
       when: image_name == "windows2019"
 
-    - name: Provision RHEL ec2 instance in AWS
+    - name: Conditionally provision RHEL ec2 instance in AWS
       amazon.aws.ec2_instance:
         region: "{{ region }}"
         state: started
@@ -55,22 +55,18 @@
       register: ec2_instance_facts_rhel      
       when: image_name is match("rhel*")
 
-    - name: show ec2_instance_facts information
-      debug:  
-        var: ec2_instance_facts
-
-    - name: initialize target_hosts as an empty list
+    - name: initialize target_hosts as an empty list/array
       set_fact:
         target_hosts: []
 
-    - name: load new instances into target_hosts list (used in future plays for config)
+    - name: load RHEL instances into target_hosts list (used in future plays for config)
       when: image_name is match("rhel*")
       set_stats:
         data: 
           target_hosts: "{{ target_hosts + [ item.public_dns_name ] }}"
       loop: "{{ ec2_instance_facts_rhel.instances }}"
 
-    - name: load new instances into target_hosts list (used in future plays for config)
+    - name: load Windows instances into target_hosts list (used in future plays for config)
       when: image_name == "windows2019" 
       set_stats:
         data: 
@@ -80,25 +76,6 @@
     - name: give instance time to initialize before configuration
       ansible.builtin.wait_for: 
         timeout: 150
-
-#    - name: wait until provisioned instances are in "running" status
-#      amazon.aws.ec2_instance_info: 
-#      register: r_instance_facts
-#      until: r_instance_facts.instances.state.name = "running"
-#      retries: 30
-#      delay: 10
-
-#    - name: Wait 600 seconds for target connection to become reachable/usable
-#      wait_for_connection:
-
-#    - name: Wait for system to receive commands
-#      delegate_to: "{{ item }}"
-#      command: id 
-#      register: result
-#      until: result.rc = 0
-#      retries: 35
-#      delay: 10
-#      loop: "{{ target_hosts }}"
 
 
 
