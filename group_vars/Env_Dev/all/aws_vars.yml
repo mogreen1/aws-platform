@@ -1,0 +1,13 @@
+---
+security_group_id: sg-0bdbd70e35827b5f9
+ami_id:
+  rhel84: ami-0635a8c4049019474
+  rhel85: ami-06f1e6f8b3457ae7c
+  windows2019: ami-041306c411c38a789
+instance_size: m4.xlarge
+instance_tags: {'Name':'mkb-platform-ec2-insights-demo'}
+vpc_id: vpc-0c905f1fdf60945bd
+ssh_key_name: ansible-ssa-demo-key
+region: us-east-1
+subnet_id: subnet-0cd4ed414d34e70e5
+boto_profile: "3.3"
