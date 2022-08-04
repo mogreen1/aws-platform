@@ -64,13 +64,13 @@
         group: root
         owner: root
         mode: 0644
-        loop:
-          - key: application
-            value: "{{ app_tag }}"
-          - key: environment
-            value: "{{ env_tag }}"
-          - key: name
-            value: "{{ name_tag }}"
+      loop:
+        - key: application
+          value: "{{ app_tag }}"
+        - key: environment
+          value: "{{ env_tag }}"
+        - key: name
+          value: "{{ name_tag }}"
       ignore_errors: True
 
     - name: register system to insights
