@@ -16,7 +16,7 @@
       register: ec2_instance_facts
 
     - debug:  
-        var: item.public_dns_name
+        msg: "{{ item.public_dns_name }}"
       loop: "{{ ec2_instance_facts.instances }}"
 
 #    - name: shut down instances
