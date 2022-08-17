@@ -6,4 +6,4 @@
 
   tasks:
   - debug: 
-      msg: "{{ some_value }} rounded is {{ some_value | round }}
+      msg: "{{ some_value }} rounded is {{ some_value | round }}""
