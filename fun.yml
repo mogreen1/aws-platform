@@ -2,8 +2,12 @@
 - name: just messing around
   hosts: localhost
   vars: 
-    some_value: 3.99
+    some_value: 
+      - 2
+      - 4
+      - 6
+      - 8
 
   tasks:
   - debug: 
-      msg: "{{ some_value }} rounded is {{ some_value | round }}"
+      msg: "{{ some_value }} randomized is  {{ some_value | random }}"
