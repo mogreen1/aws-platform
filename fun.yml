@@ -19,4 +19,4 @@
 
   tasks:
   - debug: 
-      msg: "{{ some_value }} and {{ other_value}} united is {{ some_value | union(other_value) }}"
+      msg: "{{ some_value }} and {{ other_value}} intersected is {{ some_value | intersect(other_value) }}"
