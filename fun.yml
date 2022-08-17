@@ -7,7 +7,15 @@
       - 2
       - 3
       - 8
+    other_value:
+      - a
+      - b
+      - c
+    third_value:
+      - '*'
+      - '#'
+      - '+'
 
   tasks:
   - debug: 
-      msg: "{{ some_value }} sorted is  {{ some_value | sort }}"
+      msg: "{{ some_value }}, {{ other_value}}, and {{ third_value}} flattened is {{ [some_value, other_value, third_value] | flatten(other_value) }}"
