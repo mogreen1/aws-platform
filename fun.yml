@@ -2,8 +2,8 @@
 - name: just messing around
   hosts: localhost
   vars: 
-    some_value: 1728
+    some_value: 3
 
   tasks:
   - debug: 
-      msg: log of {{ some_value }} is {{ some_value | log(0.08333) }}
+      msg: power of {{ some_value }} to the 3rd power is {{ some_value | pow(3) }}
