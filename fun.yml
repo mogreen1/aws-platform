@@ -8,9 +8,10 @@
       - 3
       - 8
     other_value:
-      - a
-      - b
-      - c
+      - 4
+      - 2
+      - 3
+      - 9
     third_value:
       - '*'
       - '#'
@@ -18,4 +19,4 @@
 
   tasks:
   - debug: 
-      msg: "{{ some_value }}, {{ other_value}}, and {{ third_value}} flattened is {{ [some_value, [other_value, third_value]] hello] | flatten }}"
+      msg: "{{ some_value }} and {{ other_value}} united is {{ some_value | union(other_value) }}"
