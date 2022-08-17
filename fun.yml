@@ -6,4 +6,4 @@
 
   tasks:
   - debug: 
-      msg: log of {{ some_value }} is {{ some_value | log(.08333) }}
+      msg: log of {{ some_value }} is {{ some_value | log(0.08333) }}
