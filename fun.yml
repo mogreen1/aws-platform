@@ -2,19 +2,16 @@
 - name: just messing around
   hosts: localhost
   vars: 
-    some_value: 
-      - 4
-      - 2
-      - 8
-    other_value:
-      - 4
-      - 3
-      - 9
-    third_value:
-      - '*'
-      - '#'
-      - '+'
+    some_dictionary: 
+      key1: value1
+      key2: value2
+      key3: value3
+    other_dictionary:
+      key1: value1
+      key2: value is different
+      key3: value3
+      keyA: ValueA
 
   tasks:
   - debug: 
-      msg: difference between {{ some_value }} and {{ other_value}} is {{ some_value | difference(other_value) }}"
+      msg: Dictionaries {{ some_value }} and {{ other_value}} combined is {{ some_dictionary | combine(other_dictionary) }}
