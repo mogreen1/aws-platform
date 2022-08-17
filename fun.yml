@@ -14,4 +14,4 @@
 
   tasks:
   - debug: 
-      msg: Dictionaries {{ some_value }} and {{ other_value}} combined is {{ some_dictionary | combine(other_dictionary) }}
+      msg: Dictionaries {{ some_dictionary }} and {{ other_dictionary }} combined is {{ some_dictionary | combine(other_dictionary) }}
