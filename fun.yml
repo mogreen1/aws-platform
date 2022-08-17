@@ -14,4 +14,4 @@
 
   tasks:
   - debug: 
-      msg: Dictionaries {{ some_dictionary }} and {{ other_dictionary }} combined is {{ some_dictionary | combine(other_dictionary) }}
+      msg: Dictionary {{ some_dictionary }} converted to list is {{ some_dictionary | dict2items }}
