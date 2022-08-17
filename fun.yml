@@ -3,9 +3,9 @@
   hosts: localhost
   vars: 
     some_dictionary: 
-      key1: value1
-      key2: value2
-      key3: value3
+      k1: v1
+      k2: v2
+      k3: v3
     other_dictionary:
       key1: value1
       key2: value is different
