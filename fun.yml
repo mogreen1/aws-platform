@@ -6,4 +6,4 @@
 
   tasks:
   - debug: 
-      msg: absolue value of {{ some_value }}  is {{ some_value | abs }}
+      msg: "{{ some_value }} rounded is {{ some_value | round }}
