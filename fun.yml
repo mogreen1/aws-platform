@@ -5,11 +5,9 @@
     some_value: 
       - 4
       - 2
-      - 3
       - 8
     other_value:
       - 4
-      - 2
       - 3
       - 9
     third_value:
@@ -19,4 +17,4 @@
 
   tasks:
   - debug: 
-      msg: "{{ some_value }} and {{ other_value}} intersected is {{ some_value | intersect(other_value) }}"
+      msg: difference between {{ some_value }} and {{ other_value}} is {{ some_value | difference(other_value) }}"
