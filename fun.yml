@@ -2,7 +2,7 @@
 - name: just messing around
   hosts: localhost
   vars: 
-    some_value: 144
+    some_value: 1728
 
   tasks:
   - debug: 
