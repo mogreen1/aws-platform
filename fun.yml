@@ -18,4 +18,4 @@
 
   tasks:
   - debug: 
-      msg: "{{ some_value }}, {{ other_value}}, and {{ third_value}} flattened is {{ [some_value, other_value, third_value] | flatten }}"
+      msg: "{{ some_value }}, {{ other_value}}, and {{ third_value}} flattened is {{ [some_value, [other_value, third_value]] hello] | flatten }}"
