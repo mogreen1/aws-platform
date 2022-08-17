@@ -3,13 +3,15 @@
   hosts: localhost
   vars: 
     some_dictionary: 
-      k1: 
-        - A
-        - B
-        - C
-      k2: 
-        - D
-        - E
+      - key: k1
+        value:  
+          - A
+          - B
+          - C
+      - key: k2
+        value: 
+          - D
+          - E
     other_dictionary:
       key1: value1
       key2: value is different
@@ -18,4 +20,4 @@
 
   tasks:
   - debug: 
-      msg: Dictionary {{ some_dictionary }} converted to list is {{ some_dictionary | dict2items }}
+      msg: Dictionary {{ some_dictionary }} converted to dictionary is {{ some_dictionary | items2dict }}
