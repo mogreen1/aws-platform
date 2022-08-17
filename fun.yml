@@ -10,4 +10,4 @@
 
   tasks:
   - debug: 
-      msg: "{{ some_value }} randomized is  {{ some_value | random }}"
+      msg: the length of {{ some_value }} is  {{ some_value | length }}"
