@@ -4,25 +4,37 @@
   gather_facts: false
 # vars: defaults in group_vars/all/aws_vars.yml
   vars:
-    region: {{ default('us-east-1') }}
+    region: us-east-2
+    vpc_number: 3
 
   tasks:
+
+    - name: get vpc info
+      amazon.aws.ec2_vpc_net_info:
+        region: "{{ region }}"
+      register: r_vpc_info
+
+    - name: make sure a vpc with this name doesn't exist
+      fail:
+        msg: This VPC already exists
+      when: ansible-ssa-demo-vpc{{vpc_number}} == item.vpcs.tags.Name
+      loop: r_vpc_info.vpcs
+
     - name: create a VPC with dedicated tenancy and a couple of tags
       amazon.aws.ec2_vpc_net:
-        name: ansible-ssa-demo_{{region}}
-        cidr_block: 10.10.0.0/16
+        name: ansible-ssa-demo-vpc{{vpc_number}}
+        cidr_block: 10.0.{{vpc_number}}.0/24
         region: "{{ region }}"
         tags:
-          module: ec2_vpc_net
-          this: works
-        tenancy: dedicated
+          Name: ansible-ssa-demo-vpc{{vpc_number}}
+        tenancy: default
 
     
-    - name: attach internet gateway to vpc_subnet_id
+#    - name: attach internet gateway to vpc_subnet_id
 
-    - name: add route table (add 0.0.0.0/0 target internet gateway ID)
+#    - name: add route table (add 0.0.0.0/0 target internet gateway ID)
 
-    - name: create a subnet associated with vpc_subnet_id
+#    - name: create a subnet associated with vpc_subnet_id
 
 
 
