@@ -38,6 +38,14 @@
         region: "{{ aws_region }}"
       register: r_igw
     
+    - name: Create gateway route table
+      amazon.aws.ec2_vpc_route_table:
+        vpc_id: "{{ r_vpc_facts.vpc.id }}"
+        tags:
+          Name: ansible-ssa-demo-vpc{{vpc_number}} Gateway route table
+        gateway_id: "{{ r_igw.gateway_id }}"
+      register: r_gateway_route_table
+
 #    - name: attach internet gateway to vpc_subnet_id
 
 #    - name: add route table (add 0.0.0.0/0 target internet gateway ID)
