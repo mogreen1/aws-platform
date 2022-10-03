@@ -9,16 +9,17 @@
 
   tasks:
 
-    - name: get vpc info
-      amazon.aws.ec2_vpc_net_info:
-        region: "{{ region }}"
-      register: r_vpc_info
+    # - name: get vpc info
+    #   amazon.aws.ec2_vpc_net_info:
+    #     region: "{{ region }}"
+    #   register: r_vpc_info
 
-    - name: make sure a vpc with this name doesn't exist
-      fail:
-        msg: This VPC already exists
-      when: ansible-ssa-demo-vpc{{vpc_number}} == item.vpcs.tags.Name
-      loop: r_vpc_info.vpcs | wantlist=true
+    # - name: make sure a vpc with this name doesn't exist
+    #   fail:
+    #     msg: This VPC already exists
+    #   when: ansible-ssa-demo-vpc{{vpc_number}} == item.vpcs.tags.Name
+    #   loop: "{{ r_vpc_info.vpcs | subelements('tags') }}"
+    #   loop: query( r_vpc_info.vpcs | wantlist=true
 
     - name: create a VPC with dedicated tenancy and a couple of tags
       amazon.aws.ec2_vpc_net:
