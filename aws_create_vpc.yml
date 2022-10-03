@@ -47,6 +47,14 @@
         gateway_id: "{{ r_igw.gateway_id }}"
       register: r_gateway_route_table
 
+    - name: Create subnet for servers
+      amazon.aws.ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ r_vpc_facts.vpc.id }}"
+        cidr: 10.0.{{vpc_number}}.0/24
+        region: "{{ aws_region }}"
+      register: r_subnet
+
 #    - name: attach internet gateway to vpc_subnet_id
 
 #    - name: add route table (add 0.0.0.0/0 target internet gateway ID)
