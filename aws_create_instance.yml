@@ -19,7 +19,7 @@
 
     - name: set subnet id
       debug: 
-        var: item['value'][my_idx].tags.Name
+        msg: "index {{ my_index }}: item['value']"
       loop: "{{ r_subnet_info | dict2items }}"
       loop_control:
         index_var: my_idx
