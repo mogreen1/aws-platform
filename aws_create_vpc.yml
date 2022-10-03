@@ -29,7 +29,13 @@
         tags:
           Name: ansible-ssa-demo-vpc{{vpc_number}}
         tenancy: default
+      register: r_vpc_facts
 
+    - name: Create Internet gateway
+      amazon.aws.ec2_vpc_igw:
+        vpc_id: r_vpc_facts.vpc.id
+        state: present
+      register: r_igw
     
 #    - name: attach internet gateway to vpc_subnet_id
 
