@@ -6,6 +6,15 @@
 
 
   tasks:
+    - name: get vpc info
+      amazon.aws.ec2_subnet_info:
+        region: "{{ aws_region }}"
+      register: r_subnet_info
+
+    - name: get region if no region assigned
+      debug: 
+        var: r_subnet_info
+
     - name: Conditionally provision Windows ec2 instance in AWS
       when: image_name == "windows2019"
       amazon.aws.ec2_instance:

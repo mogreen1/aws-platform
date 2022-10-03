@@ -37,7 +37,7 @@
         state: present
         region: "{{ aws_region }}"
         tags: 
-          Name: ansible-ssa-demo-vpc{{vpc_number}}-igw
+          Name: ansible-ssa-demo-vpc{{ vpc_number }}-igw
       register: r_igw
     
     - name: Create gateway route table
@@ -45,7 +45,7 @@
         region: "{{ aws_region }}"
         vpc_id: "{{ r_vpc_facts.vpc.id }}"
         tags:
-          Name: ansible-ssa-demo-vpc{{vpc_number}}-rt
+          Name: ansible-ssa-demo-vpc{{ vpc_number }}-rt
         gateway_id: "{{ r_igw.gateway_id }}"
       register: r_gateway_route_table
 
@@ -56,7 +56,7 @@
         cidr: 10.0.{{vpc_number}}.0/24
         region: "{{ aws_region }}"
         tags: 
-          Name: ansible-ssa-demo-vpc{{vpc_number}}-subnet
+          Name: ansible-ssa-demo-vpc{{ vpc_number }}-subnet
       register: r_subnet
 
 #    - name: attach internet gateway to vpc_subnet_id
