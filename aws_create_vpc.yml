@@ -53,6 +53,8 @@
         vpc_id: "{{ r_vpc_facts.vpc.id }}"
         cidr: 10.0.{{vpc_number}}.0/24
         region: "{{ aws_region }}"
+        tags: 
+          Name: ansible-ssa-demo-vpc{{vpc_number}}-subnet
       register: r_subnet
 
 #    - name: attach internet gateway to vpc_subnet_id
