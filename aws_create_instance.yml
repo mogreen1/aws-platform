@@ -7,7 +7,7 @@
 
   tasks:
     - name: get subnet info
-      amazon.aws.ec2_subnet_info:
+      amazon.aws.ec2_vpc_subnet_info:
         region: "{{ aws_region }}"
       register: r_subnet_info
 
