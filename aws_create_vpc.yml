@@ -36,6 +36,8 @@
         vpc_id: "{{ r_vpc_facts.vpc.id }}"
         state: present
         region: "{{ aws_region }}"
+        tags: 
+          Name: ansible-ssa-demo-vpc{{vpc_number}}-igw
       register: r_igw
     
     - name: Create gateway route table
@@ -43,7 +45,7 @@
         region: "{{ aws_region }}"
         vpc_id: "{{ r_vpc_facts.vpc.id }}"
         tags:
-          Name: ansible-ssa-demo-vpc{{vpc_number}} Gateway route table
+          Name: ansible-ssa-demo-vpc{{vpc_number}}-rt
         gateway_id: "{{ r_igw.gateway_id }}"
       register: r_gateway_route_table
 
