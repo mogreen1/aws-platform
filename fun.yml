@@ -20,4 +20,4 @@
 
   tasks:
   - debug: 
-      msg: Dictionary {{ some_dictionary }} converted to dictionary is {{ some_dictionary | items2dict }}
+      msg: Items {{ some_dictionary }} converted to dictionary is {{ some_dictionary | items2dict }}

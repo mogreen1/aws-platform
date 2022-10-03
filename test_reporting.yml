@@ -6,7 +6,7 @@
 #  tasks:  
 #    - name: ensure httpd package is latest
 #      yum:
-#        name: httpd
+#        name: httpd 
 #        state: latest
 #    - name: esnure httpd service is enabled and started
 #      service: 
