@@ -40,6 +40,7 @@
     
     - name: Create gateway route table
       amazon.aws.ec2_vpc_route_table:
+        region: "{{ aws_region }}"
         vpc_id: "{{ r_vpc_facts.vpc.id }}"
         tags:
           Name: ansible-ssa-demo-vpc{{vpc_number}} Gateway route table
