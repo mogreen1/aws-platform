@@ -18,7 +18,7 @@
       fail:
         msg: This VPC already exists
       when: ansible-ssa-demo-vpc{{vpc_number}} == item.vpcs.tags.Name
-      loop: r_vpc_info.vpcs
+      loop: r_vpc_info.vpcs | wantlist=true
 
     - name: create a VPC with dedicated tenancy and a couple of tags
       amazon.aws.ec2_vpc_net:
