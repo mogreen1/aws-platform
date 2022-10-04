@@ -59,6 +59,42 @@
           Name: ansible-ssa-demo-vpc{{ vpc_number }}-subnet
       register: r_subnet
 
+    - name: Create Security group
+      amazon.aws.ec2_group:
+        name: ansible-ssa-demo-vpc{{vpc_number}}-sg
+        description: sg with rule descriptions
+        vpc_id: "{{ r_vpc_facts.vpc.id }}"
+        # profile: "{{ aws_profile }}"
+        region: "{{ aws_region }}"
+        rules:
+          - proto: tcp
+            ports:
+            - 80
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all on port 80
+          - proto: tcp
+            ports:
+            - 443
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all on port 443
+          - proto: tcp
+            ports:
+            - 22
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all on port 22
+          - proto: tcp
+            ports:
+            - 27199
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all on port 27199
+          - proto: tcp
+            ports:
+            - 5432
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all on port 5432
+      register: r_sg
+
+
 #    - name: attach internet gateway to vpc_subnet_id
 
 #    - name: add route table (add 0.0.0.0/0 target internet gateway ID)
