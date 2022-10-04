@@ -18,7 +18,7 @@
         var: r_subnet_info | dict2items
 
     - name: set subnet id
-      when: "ansible-ssa-demo-{{vpc_number}}-subnet" == item['value'] | map(attribute='tags.Name') 
+      when: vars['ansible-ssa-demo-' + {{ vpc_number }} + '-subnet'] == item['value'] | map(attribute='tags.Name') 
       debug: 
         msg: "index {{ my_idx }}: {{ item['value'] | map(attribute='tags.Name') }}"
       loop: "{{ r_subnet_info | dict2items }}"
