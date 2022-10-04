@@ -33,7 +33,7 @@
         region: "{{ aws_region }}"
         state: started
         key_name: "{{ ssh_key_name }}"
-        security_group: "{{ security_group_id }}"
+        security_group: "{{ aws_security_group_id }}"
         instance_type: "{{ instance_size }}"
         tags: 
           Env: "{{ env_tag }}"
@@ -60,7 +60,7 @@
         count: "{{ instance_count }}"
         state: started
         key_name: "{{ ssh_key_name }}"
-        security_group: "{{ security_group_id }}"
+        security_group: "{{ aws_security_group_id }}"
         instance_type: "{{ instance_size }}"
         tags: 
           Env: "{{ env_tag }}"
