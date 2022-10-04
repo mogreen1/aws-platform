@@ -14,7 +14,7 @@
     #   # loop: "{{ subnets | dict2items }}"
     - name: subnet ID value
       debug:
-        msg: "{{ aws_vpcs[vpc_number][subnet_id] }}"
+        msg: "{{ vpc_number }} has a subnet ID of {{ aws_vpcs[vpc_number] | map(attribute=subnet_id) }}"
     # - name: get region if no region assigned
     #   debug: 
     #     var: r_subnet_info | dict2items
