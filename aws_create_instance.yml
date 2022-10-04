@@ -12,7 +12,9 @@
     #   register: r_subnet_info
     #   # when: vpc3 in item.value.tagssubnets | subelements(tags.Name)
     #   # loop: "{{ subnets | dict2items }}"
-
+    - name: subnet ID value
+      debug:
+        msg: "{{ aws_vpcs[vpc_number][subnet_id] }}"
     # - name: get region if no region assigned
     #   debug: 
     #     var: r_subnet_info | dict2items
@@ -65,7 +67,7 @@
           Name: "{{ name_tag }}"
         image_id: "{{ ami_id[aws_region][image_name] }}"
         wait: true
-        vpc_subnet_id: "{{ aws_vpcs[vpc_number][subnet_id] }}"
+        vpc_subnet_id: "{{ aws_vpcs[vpc_number][subnet_id][value] }}"
         count: "{{ instance_count }}"
         network:
           assign_public_ip: yes
