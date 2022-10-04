@@ -41,7 +41,7 @@
           Name: "{{ name_tag }}"
         image_id: "{{ ami_id[aws_region][image_name] }}"
         wait: true
-        vpc_subnet_id: "{{ aws_vpcs[vpc_number][aws_subnet_id] }}"
+        vpc_subnet_id: "{{ aws_vpcs[vpc_number]['aws_subnet_id'] }}"
         count: "{{ instance_count }}"
         network:
           assign_public_ip: yes
@@ -67,7 +67,7 @@
           Name: "{{ name_tag }}"
         image_id: "{{ ami_id[aws_region][image_name] }}"
         wait: true
-        vpc_subnet_id: "{{ aws_vpcs[vpc_number][aws_subnet_id] }}"
+        vpc_subnet_id: "{{ aws_vpcs[vpc_number]['aws_subnet_id'] }}"
         count: "{{ instance_count }}"
         network:
           assign_public_ip: yes
