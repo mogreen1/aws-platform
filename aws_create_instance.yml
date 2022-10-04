@@ -42,7 +42,7 @@
         image_id: "{{ ami_id[aws_region][image_name] }}"
         wait: true
         vpc_subnet_id: "{{ aws_vpcs[vpc_number]['aws_subnet_id'] }}"
-        exact_count: "{{ instance_count }}"
+        count: "{{ instance_count }}"
         network:
           assign_public_ip: yes
         user_data: | 
@@ -57,6 +57,7 @@
       when: image_name is match("rhel*")
       amazon.aws.ec2_instance:
         region: "{{ aws_region }}"
+        count: "{{ instance_count }}"
         state: started
         key_name: "{{ ssh_key_name }}"
         security_group: "{{ security_group_id }}"
@@ -68,7 +69,6 @@
         image_id: "{{ ami_id[aws_region][image_name] }}"
         wait: true
         vpc_subnet_id: "{{ aws_vpcs[vpc_number]['aws_subnet_id'] }}"
-        exact_count: "{{ instance_count }}"
         network:
           assign_public_ip: yes
       register: ec2_instance_facts_rhel      
