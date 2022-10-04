@@ -63,7 +63,7 @@
           Env: "{{ env_tag }}"
           App: "{{ app_tag }}"
           Name: "{{ name_tag }}"
-        image_id: "{{ ami_id[image_name] }}"
+        image_id: "{{ ami_id[aws_region][image_name] }}"
         wait: true
         vpc_subnet_id: "{{ aws_vpcs[vpc_number][subnet_id] }}"
         count: "{{ instance_count }}"
