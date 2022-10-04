@@ -18,8 +18,9 @@
         var: r_subnet_info | dict2items
 
     - name: set subnet id
+      #when: vpc_number in item['value'] | map(attribute)
       debug: 
-        msg: "index {{ my_idx }}: {{ item['value'] | map(attribute='subnet_id') }}"
+        msg: "index {{ my_idx }}: {{ item['value'] | map(attribute='[*].Name') }}"
       loop: "{{ r_subnet_info | dict2items }}"
       loop_control:
         index_var: my_idx
