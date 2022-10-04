@@ -20,5 +20,7 @@ boto_profile: "3.3"
 aws_vpcs:
   vpc3:
     subnet_id: subnet-0aa1c2efd61231bbf
+    vpc_id: vpc-0a603597a0a38f1dd
   vpc2: 
     subnet_id: subnet-0cd4ed414d34e70e5
+    vpc_id: vpc-0c905f1fdf60945bd
