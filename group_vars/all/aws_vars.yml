@@ -17,3 +17,8 @@ ssh_key_name: ansible-ssa-demo-key
 region: us-east-1
 subnet_id: subnet-0cd4ed414d34e70e5
 boto_profile: "3.3"
+aws_vpcs:
+  vpc3:
+    subnet_id: subnet-0aa1c2efd61231bbf
+  vpc2: 
+    subnet_id: subnet-0cd4ed414d34e70e5
