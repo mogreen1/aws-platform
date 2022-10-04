@@ -18,7 +18,7 @@
         var: r_subnet_info | dict2items
 
     - name: set subnet id
-      when: vars[vpc_number] in item['value'] | map(attribute='tags.Name')
+      when: vpc3 in item['value'] | map(attribute='tags.Name') | join(',')
       debug: 
         msg: "index {{ my_idx }}: {{ item['value'] | map(attribute='tags.Name') }}"
       loop: "{{ r_subnet_info | dict2items }}"
