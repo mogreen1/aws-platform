@@ -46,7 +46,9 @@
         vpc_id: "{{ r_vpc_facts.vpc.id }}"
         tags:
           Name: ansible-ssa-demo-vpc{{ vpc_number }}-rt
-        gateway_id: "{{ r_igw.gateway_id }}"
+        routes:
+          - dest: 0.0.0.0/0
+            gateway_id: "{{ r_igw.gateway_id }}"
       register: r_gateway_route_table
 
     - name: Create subnet for servers
